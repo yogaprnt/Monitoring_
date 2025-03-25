@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+
+  <body class="bg-gray-50">
+    <!-- Navbar -->
+    <header
+      class="bg-red-600 text-white flex items-center justify-between px-6 py-4 fixed w-full top-0 z-50"
+    >
+      <div class="flex items-center space-x-4">
+        <button
+          onclick="toggleSidebar()"
+          class="text-white text-2xl focus:outline-none"
+        >
+          ☰
+        </button>
+      </div>
+      <div class="flex items-center space-x-6">
+        <span class="relative">
+          <span
+            class="absolute -top-2 -right-2 bg-blue-600 text-white text-xs px-2 rounded-full"
+            >6</span
+          >
+          🔔
+        </span>
+        <span>English</span>
+        <div class="flex items-center space-x-2">
+          <img
+            src="assets/profile.png"
+            class="rounded-full w-10 h-10"
+            alt="User Profile"
+          />
+          <span>Yoga Pranata (Admin)</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Wrapper untuk sidebar + konten -->
+    <div class="flex flex-col pt-16">
+      <!-- Sidebar -->
+      <aside
+        id="sidebar"
+        class="w-64 bg-[#E8E8E8] text-black flex flex-col fixed top-16 left-0 h-full transition-transform duration-300"
+      >
+        <div class="p-5 flex justify-center">
+          <img src="assets/logo.png" alt="Telkom Indonesia" class="h-20" />
+        </div>
+        <nav class="flex-1">
+          <ul>
+            <li class="px-5 py-3 bg-red-600 text-white rounded-lg mx-2">
+              <a href="index.html">Dashboard</a>
+            </li>
+            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+              <a href="list.html">List Gedung</a>
+            </li>
+            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+              <a href="tableTenants.html">List Tenant</a>
+            </li>
+            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+              <a href="worksheet.html">WORK SHEET</a>
+            </li>
+            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+              <a href="datavisit.html">Data Visit</a>
+            </li>
+            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+              <a href="#">Product Stock</a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <div
+        id="main-content"
+        class="flex-1 flex flex-col ml-64 transition-all duration-300 p-6"
+      >
+        <h1 class="text-xl font-bold mb-4">Dashboard</h1>
+        <h3>Selamat Datang di Dashboard Kami....</h3>
+
+        <!-- Filter dan Pencarian -->
+        <div class="flex justify-end mb-4">
+          <div class="flex items-center space-x-2">
+            <select
+              id="subsegment-filter"
+              class="bg-gray-100 text-gray-700 rounded px-2 py-1 mr-2 focus:outline-none border border-gray-300"
+            >
+              <option value="all">Semua Subsegmen</option>
+              <option value="Lainnya">Lainnya</option>
+              <option value="Gedung & Kawasan">Gedung & Kawasan</option>
+            </select>
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Cari Tenant/Gedung"
+              class="bg-gray-100 text-gray-700 rounded px-2 py-1 focus:outline-none border border-gray-300"
+            />
+          </div>
+        </div>
+
+        <!-- KPI Summary -->
+        <section
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8"
+        >
+          <!-- Total CC -->
+          <div class="bg-white shadow rounded p-4 text-center">
+            <h2
+              class="text-gray-600 font-semibold flex items-center justify-center"
+            >
+              <i class="fa fa-building mr-2"></i> Total CC
+            </h2>
+            <p id="total-cc" class="text-3xl font-bold text-gray-800">362</p>
+          </div>
+
+          <!-- Tenant -->
+          <div class="bg-white shadow rounded p-4 text-center">
+            <h2
+              class="text-gray-600 font-semibold flex items-center justify-center"
+            >
+              <i class="fa fa-building mr-2"></i> Tenant
+            </h2>
+            <p id="total-tenant" class="text-3xl font-bold text-gray-800">
+              7328
+            </p>
+          </div>
+
+          <!-- Keterisian -->
+          <div class="bg-white shadow rounded p-4 text-center">
+            <h2
+              class="text-gray-600 font-semibold flex items-center justify-center"
+            >
+              <i class="fa fa-chart-bar mr-2"></i> Keterisian
+            </h2>
+            <p id="total-keterisian" class="text-3xl font-bold text-gray-800">
+              21%
+            </p>
+          </div>
+
+          <!-- Total Kunjungan -->
+          <div class="bg-white shadow rounded p-4 text-center">
+            <h2
+              class="text-gray-600 font-semibold flex items-center justify-center"
+            >
+              <i class="fa fa-map-marker-alt mr-2"></i> Total Kunjungan
+            </h2>
+            <p id="total-kunjungan" class="text-3xl font-bold text-gray-800">
+              180
+            </p>
+          </div>
+        </section>
+
+        <!-- Rekap Subsegmen -->
+        <section class="bg-white shadow rounded p-4">
+          <h2 class="text-lg font-semibold mb-4">Rekap Subsegmen</h2>
+          <table id="rekap-table" class="min-w-full">
+            <thead>
+              <tr class="bg-gray-100">
+                <th class="px-4 py-2">Subsegmen</th>
+                <th class="px-4 py-2">JML CC</th>
+                <th class="px-4 py-2">JML CC Input</th>
+                <th class="px-4 py-2">% Keterisian</th>
+                <th class="px-4 py-2">Tenant Gedung</th>
+                <th class="px-4 py-2">Tenant Data</th>
+                <th class="px-4 py-2">% Kunjungan</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="border px-4 py-2">Lainnya</td>
+                <td id="lainnya-jml-cc" class="border px-4 py-2">186</td>
+                <td id="lainnya-jml-cc-input" class="border px-4 py-2">14</td>
+                <td id="lainnya-keterisian" class="border px-4 py-2">8%</td>
+                <td id="lainnya-tenant-gedung" class="border px-4 py-2">275</td>
+                <td id="lainnya-tenant-data" class="border px-4 py-2">101</td>
+                <td id="lainnya-kunjungan" class="border px-4 py-2">48%</td>
+              </tr>
+              <tr>
+                <td class="border px-4 py-2">Gedung & Kawasan</td>
+                <td id="gedung-kawasan-jml-cc" class="border px-4 py-2">163</td>
+                <td id="gedung-kawasan-jml-cc-input" class="border px-4 py-2">
+                  60
+                </td>
+                <td id="gedung-kawasan-keterisian" class="border px-4 py-2">
+                  37%
+                </td>
+                <td id="gedung-kawasan-tenant-gedung" class="border px-4 py-2">
+                  6803
+                </td>
+                <td id="gedung-kawasan-tenant-data" class="border px-4 py-2">
+                  1911
+                </td>
+                <td id="gedung-kawasan-kunjungan" class="border px-4 py-2">
+                  48%
+                </td>
+              </tr>
+              <tr>
+                <td class="border px-4 py-2">All CC</td>
+                <td id="all-cc-jml-cc" class="border px-4 py-2">362</td>
+                <td id="all-cc-jml-cc-input" class="border px-4 py-2">76</td>
+                <td id="all-cc-keterisian" class="border px-4 py-2">21%</td>
+                <td id="all-cc-tenant-gedung" class="border px-4 py-2">7328</td>
+                <td id="all-cc-tenant-data" class="border px-4 py-2">2012</td>
+                <td id="all-cc-kunjungan" class="border px-4 py-2">48%</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Data Kunjungan -->
+        <section class="bg-white shadow rounded p-4 mt-8">
+          <h2 class="text-lg font-semibold mb-4">Data Kunjungan</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="text-center">
+              <h3 class="text-gray-600 font-semibold">Total Kunjungan</h3>
+              <p id="total-visit" class="text-2xl font-bold text-gray-800">
+                180
+              </p>
+            </div>
+            <div class="text-center">
+              <h3 class="text-gray-600 font-semibold">Visit Done</h3>
+              <p id="visit-done" class="text-2xl font-bold text-gray-800">87</p>
+            </div>
+            <div class="text-center">
+              <h3 class="text-gray-600 font-semibold">% Visit</h3>
+              <p id="persen-visit" class="text-2xl font-bold text-gray-800">
+                48%
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-6">
+            <canvas id="visitChart"></canvas>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script>
+      function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        const mainContent = document.getElementById("main-content");
+        sidebar.classList.toggle("-translate-x-full");
+        mainContent.classList.toggle("ml-64");
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // Ambil elemen-elemen filter
+        const subsegmentFilter = document.getElementById("subsegment-filter");
+        const searchInput = document.getElementById("search-input");
+
+        // Tambahkan event listener untuk filter subsegmen
+        subsegmentFilter.addEventListener("change", function () {
+          const selectedSubsegment = subsegmentFilter.value;
+          filterTable(selectedSubsegment);
+        });
+
+        // Tambahkan event listener untuk input pencarian
+        searchInput.addEventListener("input", function () {
+          const searchTerm = searchInput.value.toLowerCase();
+          searchTable(searchTerm);
+        });
+
+        function filterTable(subsegment) {
+          const tableRows = document.querySelectorAll("#rekap-table tbody tr");
+          tableRows.forEach((row) => {
+            const rowSubsegment =
+              row.querySelector("td:first-child").textContent;
+            if (subsegment === "all" || rowSubsegment === subsegment) {
+              row.style.display = "";
+            } else {
+              row.style.display = "none";
+            }
+          });
+        }
+
+        function searchTable(searchTerm) {
+          const tableRows = document.querySelectorAll("#rekap-table tbody tr");
+          tableRows.forEach((row) => {
+            let rowText = row.textContent.toLowerCase();
+            if (rowText.includes(searchTerm)) {
+              row.style.display = "";
+            } else {
+              row.style.display = "none";
+            }
+          });
+        }
+
+        // Pastikan Chart.js sudah dimuat
+        if (typeof Chart !== "undefined") {
+          // Definisi nilai untuk grafik
+          let visitDone = 87;
+          let totalVisit = 180;
+          let visitToDo = totalVisit - visitDone;
+
+          // Ambil elemen canvas
+          const ctx = document.getElementById("visitChart").getContext("2d");
+
+          // Tambahkan tinggi untuk memastikan grafik muncul
+          document.getElementById("visitChart").parentElement.style.height =
+            "300px";
+
+          // Membuat diagram batang
+          new Chart(ctx, {
+            type: "bar",
+            data: {
+              labels: ["Visit Done", "Visit To Do"],
+              datasets: [
+                {
+                  label: "Jumlah Kunjungan",
+                  data: [visitDone, visitToDo],
+                  backgroundColor: [
+                    "rgba(54, 162, 235, 0.8)",
+                    "rgba(255, 99, 132, 0.8)",
+                  ],
+                  borderWidth: 1,
+                  barThickness: 50,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              scales: {
+                x: {
+                  grid: { display: false },
+                },
+                y: {
+                  beginAtZero: true,
+                  ticks: { stepSize: 10 },
+                },
+              },
+              plugins: {
+                legend: { display: true },
+                tooltip: {
+                  callbacks: {
+                    label: function (context) {
+                      let label = context.label || "";
+                      if (label) label += ": ";
+                      if (context.parsed !== null) {
+                        label +=
+                          context.parsed +
+                          " (" +
+                          (
+                            (context.dataset.data[context.dataIndex] /
+                              totalVisit) *
+                            100
+                          ).toFixed(2) +
+                          "%)";
+                      }
+                      return label;
+                    },
+                  },
+                },
+              },
+            },
+          });
+        } else {
+          console.error("Chart.js gagal dimuat!");
+        }
+      });
+    </script>
+  </body>
+</html>

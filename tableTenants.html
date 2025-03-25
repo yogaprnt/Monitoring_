@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Tenant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100">
+    <!-- Navbar -->
+    <header
+      class="bg-red-600 text-white flex items-center justify-between px-6 py-4 fixed w-full top-0 z-50"
+    >
+      <div class="flex items-center space-x-4">
+        <button
+          onclick="toggleSidebar()"
+          class="text-white text-2xl focus:outline-none"
+        >
+          ☰
+        </button>
+      </div>
+      <div class="flex items-center space-x-6">
+        <span class="relative">
+          <span
+            class="absolute -top-2 -right-2 bg-blue-600 text-white text-xs px-2 rounded-full"
+            >6</span
+          >
+          🔔
+        </span>
+        <span>English</span>
+        <div class="flex items-center space-x-2">
+          <img
+            src="assets/profile.png"
+            class="rounded-full w-10 h-10"
+            alt="User Profile"
+          />
+          <span>Yoga Pranata (Admin)</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Wrapper untuk sidebar + konten -->
+    <div class="flex flex-col pt-16">
+      <!-- Sidebar -->
+      <aside
+        id="sidebar"
+        class="w-64 bg-[#E8E8E8] text-black flex flex-col fixed top-16 left-0 h-full transition-transform duration-300"
+      >
+        <div class="p-5 flex justify-center">
+          <img src="assets/logo.png" alt="Telkom Indonesia" class="h-20" />
+        </div>
+        <nav class="flex-1">
+          <ul>
+            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+              <a href="index.html">Dashboard</a>
+            </li>
+            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+              <a href="list.html">List Gedung</a>
+            </li>
+            <li class="px-5 py-3 bg-red-600 text-white rounded-lg mx-2">
+              <a href="tableTenants.html">List Tenant</a>
+            </li>
+            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+              <a href="worksheet.html">WORK SHEET</a>
+            </li>
+            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+              <a href="datavisit.html">Data Visit</a>
+            </li>
+            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+              <a href="#">Product Stock</a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <div id="main-content" class="flex-1 flex flex-col ml-64 p-6 mt-16">
+        <h2 class="text-xl font-bold mb-4">Data Tenant</h2>
+
+        <!-- Tabel Data Tenant -->
+        <table
+          class="w-full bg-white shadow-md rounded-lg overflow-hidden mb-4 border-collapse border border-black"
+        >
+          <thead>
+            <tr class="bg-gray-200 text-left border-b border-black">
+              <th class="p-3 min-w-[60px] border-r border-black">No</th>
+              <th class="p-3 min-w-[120px] border-r border-black">Nama AM</th>
+              <th class="p-3 min-w-[120px] border-r border-black">Nama CC</th>
+              <th class="p-3 min-w-[120px] border-r border-black">Subsegmen</th>
+              <th class="p-3 min-w-[180px] border-r border-black">
+                Nama Gedung / Conglomeration
+              </th>
+              <th class="p-3 min-w-[180px] border-r border-black">
+                Jumlah Tenant
+              </th>
+              <th class="p-3 min-w-[200px] border-r border-black">
+                Jumlah Lantai Gedung
+              </th>
+              <th class="p-3 min-w-[180px] border-r border-black">
+                Ada PKS atau Tidak
+              </th>
+              <th class="p-3 min-w-[180px] border-r border-black">Jenis PKS</th>
+              <th class="p-3 min-w-[100px] border-r border-black">EOS</th>
+              <th class="p-3 min-w-[120px] border-r border-black">FO/MSAN</th>
+              <th class="p-3 min-w-[180px] border-r border-black">
+                Nama - Influencer
+              </th>
+              <th class="p-3 min-w-[180px] border-r border-black">
+                Jabatan - Influencer
+              </th>
+              <th class="p-3 min-w-[140px] border-r border-black">
+                Decision Maker
+              </th>
+              <th class="p-3 min-w-[180px] border-r border-black">
+                Status Visit
+              </th>
+              <th class="p-3 min-w-[200px] border-r border-black">
+                Jumlah Tenant Sudah Diperbarui
+              </th>
+              <th class="p-3 min-w-[120px] border-r border-black">
+                Progress (%)
+              </th>
+              <th class="p-3 min-w-[200px] border-r border-black">
+                Note Gedung / Tenant
+              </th>
+              <th class="p-3 min-w-[200px] border-r border-black">Aksi</th>
+            </tr>
+          </thead>
+
+          <tbody id="tenant-table">
+            <!-- Data rows will be dynamically inserted here -->
+          </tbody>
+        </table>
+
+        <!-- Tombol Tambah Data -->
+        <div class="flex justify-start mb-4">
+          <a
+            href="tambahdatatenant.html"
+            class="bg-blue-500 text-white px-4 py-2 rounded shadow-md hover:bg-blue-600 transition duration-300"
+          >
+            + Tambah Data
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        const mainContent = document.getElementById("main-content");
+        sidebar.classList.toggle("-translate-x-full");
+        mainContent.classList.toggle("ml-64");
+      }
+
+      // Fungsi untuk menampilkan data di tabel
+      function renderTable() {
+        let tenants = JSON.parse(localStorage.getItem("tenants")) || [];
+        let tableBody = document.getElementById("tenant-table");
+        tableBody.innerHTML = "";
+
+        tenants.forEach((tenant, index) => {
+          tableBody.innerHTML += `
+      <tr class="border-t border-black">
+        <td class="p-3 border-r border-black">${index + 1}</td>
+        <td class="p-3 border-r border-black">${tenant.namaAM}</td>
+        <td class="p-3 border-r border-black">${tenant.namaCC}</td>
+        <td class="p-3 border-r border-black">${tenant.subsegmen}</td>
+        <td class="p-3 border-r border-black">${tenant.namaGedung}</td>
+        <td class="p-3 border-r border-black">${tenant.jumlahTenant}</td>
+        <td class="p-3 border-r border-black">${tenant.jumlahLantai}</td>
+        <td class="p-3 border-r border-black">${tenant.pks}</td>
+        <td class="p-3 border-r border-black">${tenant.jenisPKS}</td>
+        <td class="p-3 border-r border-black">${tenant.eos}</td>
+        <td class="p-3 border-r border-black">${tenant.foMSAN}</td>
+        <td class="p-3 border-r border-black">${tenant.namaInfluencer}</td>
+        <td class="p-3 border-r border-black">${tenant.jabatanInfluencer}</td>
+        <td class="p-3 border-r border-black">${tenant.decisionMaker}</td>
+        <td class="p-3 border-r border-black">${tenant.statusVisit}</td>
+        <td class="p-3 border-r border-black">${tenant.jumlahTenantVisit}</td>
+        <td class="p-3 border-r border-black">${tenant.progress}</td>
+        <td class="p-3 border-r border-black">${tenant.note}</td>
+        <td class="p-3 border-r border-black">
+          <button class="bg-yellow-500 text-white px-3 py-1 rounded" onclick="editTenant(${index})">Edit</button>
+          <button class="bg-red-500 text-white px-3 py-1 rounded" onclick="deleteTenant(${index})">Hapus</button>
+        </td>
+      </tr>
+    `;
+        });
+      }
+
+      // Fungsi untuk menghapus data tenant
+      function deleteTenant(index) {
+        let tenants = JSON.parse(localStorage.getItem("tenants")) || [];
+        tenants.splice(index, 1); // Menghapus data tenant pada index yang dipilih
+        localStorage.setItem("tenants", JSON.stringify(tenants)); // Menyimpan kembali data yang telah diperbarui
+        renderTable(); // Memperbarui tampilan tabel
+      }
+
+      document.addEventListener("DOMContentLoaded", renderTable);
+    </script>
+  </body>
+</html>

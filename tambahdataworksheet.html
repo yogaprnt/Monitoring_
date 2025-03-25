@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tambah Data Worksheet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100">
+    <header
+      class="bg-red-600 text-white flex items-center justify-between px-6 py-4 fixed w-full top-0 z-50"
+    >
+      <button
+        onclick="toggleSidebar()"
+        class="text-white text-2xl focus:outline-none"
+      >
+        ☰
+      </button>
+      <div class="flex items-center space-x-6">
+        <span>English</span>
+        <div class="flex items-center space-x-2">
+          <img
+            src="assets/profile.png"
+            class="rounded-full w-10 h-10"
+            alt="User Profile"
+          />
+          <span>Yoga Pranata (Admin)</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="flex flex-col pt-16">
+      <aside
+        id="sidebar"
+        class="w-64 bg-[#E8E8E8] text-black flex flex-col fixed top-16 left-0 h-full transition-transform duration-300"
+      >
+        <div class="p-5 flex justify-center">
+          <img src="assets/logo.png" alt="Telkom Indonesia" class="h-20" />
+        </div>
+        <nav class="flex-1">
+          <ul>
+            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+              <a href="index.html">Dashboard</a>
+            </li>
+            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+              <a href="list.html">List Gedung</a>
+            </li>
+            <li class="px-5 py-3 bg-red-600 text-white rounded-lg mx-2">
+              <a href="tableTenants.html">List Tenant</a>
+            </li>
+            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+              <a href="worksheet.html">WORK SHEET</a>
+            </li>
+            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+              <a href="datavisit.html">Data Visit</a>
+            </li>
+            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+              <a href="#">Product Stock</a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <div id="main-content" class="flex-1 flex flex-col ml-64 p-6 mt-16">
+        <h2 class="text-xl font-bold mb-4">Tambah Data Worksheet</h2>
+
+        <!-- Form untuk menambah data worksheet -->
+        <form
+          id="worksheet-form"
+          class="bg-white shadow-md rounded-lg p-6 space-y-4"
+        >
+          <table
+            class="min-w-full table-auto border-collapse border border-gray-300"
+          >
+            <thead>
+              <tr class="bg-gray-200">
+                <th class="p-3 text-left">No</th>
+                <th class="p-3 text-left">NIPNAS</th>
+                <th class="p-3 text-left">Corporate Customer</th>
+                <th class="p-3 text-left">New TREG HO</th>
+                <th class="p-3 text-left">NEW WITEL HO</th>
+                <th class="p-3 text-left">SUBSEGMEN</th>
+                <th class="p-3 text-left">GROUP CONGLO</th>
+                <th class="p-3 text-left">UNLOCK/PAILIT/ISSUE</th>
+                <th class="p-3 text-left">TOP CC DPS</th>
+                <th class="p-3 text-left">SEGMEN 2024</th>
+                <th class="p-3 text-left">NIK AM</th>
+                <th class="p-3 text-left">AM FEB 2024</th>
+                <th class="p-3 text-left">JABATAN AM</th>
+                <th class="p-3 text-left">LOKER AM</th>
+                <th class="p-3 text-left">PROPORSI FEB</th>
+                <th class="p-3 text-left">KET AM</th>
+                <th class="p-3 text-left">FILTER CC</th>
+                <th class="p-3 text-left">JUMLAH GEDUNG/CONGLO</th>
+                <th class="p-3 text-left">
+                  JUMLAH TENANT/ANPRUS DI DATA GEDUNG/CONGLO
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-3">
+                  <input
+                    type="text"
+                    id="no"
+                    class="w-full px-4 py-2 border rounded-md"
+                    required
+                  />
+                </td>
+                <td class="p-3">
+                  <input
+                    type="text"
+                    id="nipnas"
+                    class="w-full px-4 py-2 border rounded-md"
+                    required
+                  />
+                </td>
+                <td class="p-3">
+                  <input
+                    type="text"
+                    id="corporateCustomer"
+                    class="w-full px-4 py-2 border rounded-md"
+                    required
+                  />
+                </td>
+                <td class="p-3">
+                  <input
+                    type="text"
+                    id="newTREGHO"
+                    class="w-full px-4 py-2 border rounded-md"
+                    required
+                  />
+                </td>
+                <td class="p-3">
+                  <input
+                    type="text"
+                    id="newWITELHO"
+                    class="w-full px-4 py-2 border rounded-md"
+                    required
+                  />
+                </td>
+                <td class="p-3">
+                  <input
+                    type="text"
+                    id="subsegmen"
+                    class="w-full px-4 py-2 border rounded-md"
+                    required
+                  />
+                </td>
+                <td class="p-3">
+                  <input
+                    type="text"
+                    id="groupConglo"
+                    class="w-full px-4 py-2 border rounded-md"
+                    required
+                  />
+                </td>
+                <td class="p-3">
+                  <input
+                    type="text"
+                    id="unlockPailitIssue"
+                    class="w-full px-4 py-2 border rounded-md"
+                    required
+                  />
+                </td>
+                <td class="p-3">
+                  <input
+                    type="text"
+                    id="topCCDPS"
+                    class="w-full px-4 py-2 border rounded-md"
+                    required
+                  />
+                </td>
+                <td class="p-3">
+                  <input
+                    type="text"
+                    id="segmen2024"
+                    class="w-full px-4 py-2 border rounded-md"
+                    required
+                  />
+                </td>
+                <td class="p-3">
+                  <input
+                    type="text"
+                    id="nikAM"
+                    class="w-full px-4 py-2 border rounded-md"
+                    required
+                  />
+                </td>
+                <td class="p-3">
+                  <input
+                    type="text"
+                    id="amFeb2024"
+                    class="w-full px-4 py-2 border rounded-md"
+                    required
+                  />
+                </td>
+                <td class="p-3">
+                  <input
+                    type="text"
+                    id="jabatanAM"
+                    class="w-full px-4 py-2 border rounded-md"
+                    required
+                  />
+                </td>
+                <td class="p-3">
+                  <input
+                    type="text"
+                    id="lokerAM"
+                    class="w-full px-4 py-2 border rounded-md"
+                    required
+                  />
+                </td>
+                <td class="p-3">
+                  <input
+                    type="text"
+                    id="proporsiFeb"
+                    class="w-full px-4 py-2 border rounded-md"
+                    required
+                  />
+                </td>
+                <td class="p-3">
+                  <input
+                    type="text"
+                    id="ketAM"
+                    class="w-full px-4 py-2 border rounded-md"
+                    required
+                  />
+                </td>
+                <td class="p-3">
+                  <input
+                    type="text"
+                    id="filterCC"
+                    class="w-full px-4 py-2 border rounded-md"
+                    required
+                  />
+                </td>
+                <td class="p-3">
+                  <input
+                    type="text"
+                    id="jumlahGedungConglo"
+                    class="w-full px-4 py-2 border rounded-md"
+                    required
+                  />
+                </td>
+                <td class="p-3">
+                  <input
+                    type="text"
+                    id="jumlahTenant"
+                    class="w-full px-4 py-2 border rounded-md"
+                    required
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="flex justify-end mt-4">
+            <button
+              type="submit"
+              class="bg-blue-500 text-white px-4 py-2 rounded-md"
+            >
+              Simpan
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("worksheet-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const worksheetData = {
+            no: document.getElementById("no").value,
+            nipnas: document.getElementById("nipnas").value,
+            corporateCustomer:
+              document.getElementById("corporateCustomer").value,
+            newTREGHO: document.getElementById("newTREGHO").value,
+            newWITELHO: document.getElementById("newWITELHO").value,
+            subsegmen: document.getElementById("subsegmen").value,
+            groupConglo: document.getElementById("groupConglo").value,
+            unlockPailitIssue:
+              document.getElementById("unlockPailitIssue").value,
+            topCCDPS: document.getElementById("topCCDPS").value,
+            segmen2024: document.getElementById("segmen2024").value,
+            nikAM: document.getElementById("nikAM").value,
+            amFeb2024: document.getElementById("amFeb2024").value,
+            jabatanAM: document.getElementById("jabatanAM").value,
+            lokerAM: document.getElementById("lokerAM").value,
+            proporsiFeb: document.getElementById("proporsiFeb").value,
+            ketAM: document.getElementById("ketAM").value,
+            filterCC: document.getElementById("filterCC").value,
+            jumlahGedungConglo:
+              document.getElementById("jumlahGedungConglo").value,
+            jumlahTenant: document.getElementById("jumlahTenant").value,
+          };
+
+          // Store data to localStorage
+          let worksheetEntries =
+            JSON.parse(localStorage.getItem("worksheetEntries")) || [];
+          worksheetEntries.push(worksheetData);
+          localStorage.setItem(
+            "worksheetEntries",
+            JSON.stringify(worksheetEntries)
+          );
+
+          // Redirect to worksheet page
+          window.location.href = "worksheet.html";
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Visit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <header
+      class="bg-red-600 text-white flex items-center justify-between px-6 py-4 fixed w-full top-0 z-50"
+    >
+      <div class="flex items-center space-x-4">
+        <button
+          onclick="toggleSidebar()"
+          class="text-white text-2xl focus:outline-none"
+        >
+          ☰
+        </button>
+      </div>
+      <div class="flex items-center space-x-6">
+        <span class="relative">
+          <span
+            class="absolute -top-2 -right-2 bg-blue-600 text-white text-xs px-2 rounded-full"
+            >6</span
+          >
+          🔔
+        </span>
+        <span>English</span>
+        <div class="flex items-center space-x-2">
+          <img
+            src="assets/profile.png"
+            class="rounded-full w-10 h-10"
+            alt="User  Profile"
+          />
+          <span>Yoga Pranata (Admin)</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Wrapper untuk sidebar + konten -->
+    <div class="flex flex-col pt-16">
+      <!-- Sidebar -->
+      <aside
+        id="sidebar"
+        class="w-64 bg-[#E8E8E8] text-black flex flex-col fixed top-16 left-0 h-full transition-transform duration-300"
+      >
+        <div class="p-5 flex justify-center">
+          <img src="assets/logo.png" alt="Telkom Indonesia" class="h-20" />
+        </div>
+        <nav class="flex-1">
+          <ul>
+            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+              <a href="index.html">Dashboard</a>
+            </li>
+            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+              <a href="list.html">List Gedung</a>
+            </li>
+            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+              <a href="tableTenants.html">List Tenant</a>
+            </li>
+            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+              <a href="worksheet.html">WORK SHEET</a>
+            </li>
+            <li class="px-5 py-3 bg-red-600 text-white rounded-lg mx-2">
+              <a href="datavisit.html">Data Visit</a>
+            </li>
+            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+              <a href="#">Product Stock</a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <div id="main-content" class="flex-1 flex flex-col ml-64">
+        <main class="p-6 mt-16">
+          <h2 class="text-xl font-bold">Data Visit</h2>
+          <table
+            class="w-full bg-white shadow-md rounded-lg overflow-hidden mb-4"
+          >
+            <thead>
+              <tr class="bg-gray-200 text-left">
+                <th class="p-3">Tanggal</th>
+                <th class="p-3">AM</th>
+                <th class="p-3">CC</th>
+                <th class="p-3">Gedung</th>
+                <th class="p-3">Tenant</th>
+                <th class="p-3">Agenda</th>
+                <th class="p-3">Pembahasan</th>
+                <th class="p-3">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="visit-table"></tbody>
+          </table>
+
+          <div class="flex justify-between items-center">
+            <input
+              type="text"
+              id="search"
+              placeholder="Search"
+              class="px-4 py-2 border rounded-lg bg-white text-black focus:outline-none"
+              onkeyup="searchTable()"
+            />
+            <button
+              onclick="openAddModal()"
+              class="bg-blue-600 text-white px-4 py-2 rounded flex items-center gap-2"
+            >
+              <i class="fas fa-plus text-white"></i>
+              <span>Tambah Data</span>
+            </button>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Modal untuk Tambah/Edit Data -->
+    <div
+      id="modal"
+      class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center"
+    >
+      <div class="bg-white p-6 rounded-lg shadow-lg w-1/3">
+        <h2 id="modal-title" class="text-xl font-bold mb-4">Tambah Data</h2>
+        <input type="hidden" id="edit-index" />
+        <input
+          type="date"
+          id="tgl"
+          placeholder="Tanggal"
+          class="w-full p-2 border rounded mb-2"
+          required
+        />
+        <input
+          type="text"
+          id="am"
+          placeholder="AM"
+          class="w-full p-2 border rounded mb-2"
+          required
+        />
+        <input
+          type="text"
+          id="cc"
+          placeholder="CC"
+          class="w-full p-2 border rounded mb-2"
+          required
+        />
+        <input
+          type="text"
+          id="gedung"
+          placeholder="Gedung"
+          class="w-full p-2 border rounded mb-2"
+          required
+        />
+        <input
+          type="text"
+          id="tenant"
+          placeholder="Tenant"
+          class="w-full p-2 border rounded mb-2"
+          required
+        />
+        <input
+          type="text"
+          id="agenda"
+          placeholder="Agenda"
+          class="w-full p-2 border rounded mb-2"
+          required
+        />
+        <input
+          type="text"
+          id="pembahasan"
+          placeholder="Pembahasan"
+          class="w-full p-2 border rounded mb-2"
+          required
+        />
+        <div class="flex justify-end gap-2">
+          <button onclick="closeModal()" class="bg-gray-400 px-4 py-2 rounded">
+            Batal
+          </button>
+          <button
+            onclick="saveData()"
+            class="bg-blue-600 text-white px-4 py-2 rounded"
+          >
+            Simpan
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function toggleSidebar() {
+        let sidebar = document.getElementById("sidebar");
+        let content = document.getElementById("main-content");
+        sidebar.classList.toggle("w-0");
+        sidebar.classList.toggle("overflow-hidden");
+        content.classList.toggle("ml-0");
+        content.classList.toggle("ml-64");
+      }
+
+      function searchTable() {
+        let input = document.getElementById("search").value.toLowerCase();
+        let rows = document.querySelectorAll("#visit-table tr");
+        rows.forEach((row) => {
+          row.style.display = row.innerText.toLowerCase().includes(input)
+            ? ""
+            : "none";
+        });
+      }
+
+      function openAddModal() {
+        document.getElementById("modal-title").innerText = "Tambah Data"; // Set title to "Tambah Data"
+        document.getElementById("edit-index").value = ""; // Reset index
+        document.getElementById("tgl").value = "";
+        document.getElementById("am").value = "";
+        document.getElementById("cc").value = "";
+        document.getElementById("gedung").value = "";
+        document.getElementById("tenant").value = "";
+        document.getElementById("agenda").value = "";
+        document.getElementById("pembahasan").value = "";
+        document.getElementById("modal").classList.remove("hidden");
+      }
+
+      function openEditModal(index) {
+        let visits = JSON.parse(localStorage.getItem("visits")) || [];
+        let visit = visits[index];
+
+        document.getElementById("modal-title").innerText = "Edit Data"; // Set title to "Edit Data"
+        document.getElementById("edit-index").value = index;
+        document.getElementById("tgl").value = visit.tgl;
+        document.getElementById("am").value = visit.am;
+        document.getElementById("cc").value = visit.cc;
+        document.getElementById("gedung").value = visit.gedung;
+        document.getElementById("tenant").value = visit.tenant;
+        document.getElementById("agenda").value = visit.agenda;
+        document.getElementById("pembahasan").value = visit.pembahasan;
+
+        document.getElementById("modal").classList.remove("hidden");
+      }
+
+      function deleteVisit(index) {
+        let visits = JSON.parse(localStorage.getItem("visits")) || [];
+        visits.splice(index, 1);
+        localStorage.setItem("visits", JSON.stringify(visits));
+        renderTable(); // Refresh tabel setelah hapus data
+      }
+
+      function closeModal() {
+        document.getElementById("modal").classList.add("hidden");
+      }
+
+      function saveData() {
+        let visits = JSON.parse(localStorage.getItem("visits")) || [];
+        let index = document.getElementById("edit-index").value;
+        let newVisit = {
+          tgl: document.getElementById("tgl").value,
+          am: document.getElementById("am").value,
+          cc: document.getElementById("cc").value,
+          gedung: document.getElementById("gedung").value,
+          tenant: document.getElementById("tenant").value,
+          agenda: document.getElementById("agenda").value,
+          pembahasan: document.getElementById("pembahasan").value,
+        };
+
+        if (index === "") {
+          visits.push(newVisit);
+        } else {
+          visits[index] = newVisit;
+        }
+
+        localStorage.setItem("visits", JSON.stringify(visits));
+        closeModal();
+        renderTable();
+      }
+
+      function renderTable() {
+        let visits = JSON.parse(localStorage.getItem("visits")) || [];
+        let visitTable = document.getElementById("visit-table");
+        visitTable.innerHTML = "";
+        visits.forEach((visit, index) => {
+          visitTable.innerHTML += `<tr>
+                      <td class="p-3">${visit.tgl}</td>
+                      <td class="p-3">${visit.am}</td>
+                      <td class="p-3">${visit.cc}</td>
+                      <td class="p-3">${visit.gedung}</td>
+                      <td class="p-3">${visit.tenant}</td>
+                      <td class="p-3">${visit.agenda}</td>
+                      <td class="p-3">${visit.pembahasan}</td>
+                      <td class="p-3">
+                          <button onclick="openEditModal(${index})" class="bg-yellow-500 text-white px-3 py-1 rounded">Edit</button>
+                          <button onclick="deleteVisit(${index})" class="bg-red-500 text-white px-3 py-1 rounded">Hapus</button>
+                      </td>
+                  </tr>`;
+        });
+      }
+
+      document.addEventListener("DOMContentLoaded", renderTable);
+    </script>
+  </body>
+</html>

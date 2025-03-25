@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>List Gedung</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <header
+      class="bg-red-600 text-white flex items-center justify-between px-6 py-4 fixed w-full top-0 z-50"
+    >
+      <div class="flex items-center space-x-4">
+        <button
+          onclick="toggleSidebar()"
+          class="text-white text-2xl focus:outline-none"
+        >
+          ☰
+        </button>
+      </div>
+      <div class="flex items-center space-x-6">
+        <span class="relative">
+          <span
+            class="absolute -top-2 -right-2 bg-blue-600 text-white text-xs px-2 rounded-full"
+            >6</span
+          >
+          🔔
+        </span>
+        <span>English</span>
+        <div class="flex items-center space-x-2">
+          <img
+            src="assets/profile.png"
+            class="rounded-full w-10 h-10"
+            alt="User Profile"
+          />
+          <span>Yoga Pranata (Admin)</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Wrapper untuk sidebar + konten -->
+    <div class="flex flex-col pt-16">
+      <!-- Sidebar -->
+      <aside
+        id="sidebar"
+        class="w-64 bg-[#E8E8E8] text-black flex flex-col fixed top-16 left-0 h-full transition-transform duration-300"
+      >
+        <div class="p-5 flex justify-center">
+          <img src="assets/logo.png" alt="Telkom Indonesia" class="h-20" />
+        </div>
+        <nav class="flex-1">
+          <ul>
+            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+              <a href="index.html">Dashboard</a>
+            </li>
+            <li class="px-5 py-3 bg-red-600 text-white rounded-lg mx-2">
+              <a href="list.html">List Gedung</a>
+            </li>
+            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+              <a href="tableTenants.html">List Tenant</a>
+            </li>
+            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+              <a href="worksheet.html">WORK SHEET</a>
+            </li>
+            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+              <a href="datavisit.html">Data Visit</a>
+            </li>
+            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+              <a href="#">Product Stock</a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <div
+        id="main-content"
+        class="flex-1 flex flex-col transition-all duration-300 ml-64"
+      >
+        <main class="p-6 mt-16">
+          <h2 class="text-xl font-bold">List Gedung</h2>
+          <table
+            class="w-full bg-white shadow-md rounded-lg overflow-hidden mb-4"
+          >
+            <thead>
+              <tr class="bg-gray-200 text-left">
+                <th class="p-3">NAMA AM</th>
+                <th class="p-3">NAMA CC</th>
+                <th class="p-3">SUBSEGMEN</th>
+                <th class="p-3">NAMA GEDUNG / CONGLOMERATION</th>
+                <th class="p-3">NAMA TENANT / PERUSAHAAN / ANAK PERUSAHAAN</th>
+                <th class="p-3">LAYANAN EKSISTING</th>
+                <th class="p-3">NAMA PIC TENANT / ANPRUS</th>
+                <th class="p-3">JENIS USAHA</th>
+                <th class="p-3">JABATAN PIC TENANT/ANPRUS</th>
+                <th class="p-3">ADA NIPMAS DI SEGMEN LAIN ATAU TIDAK</th>
+                <th class="p-3">SEGMEN MANA</th>
+                <th class="p-3">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="visit-table"></tbody>
+          </table>
+
+          <div class="flex justify-between items-center">
+            <input
+              type="text"
+              id="search"
+              placeholder="Search"
+              class="px-4 py-2 border rounded-lg bg-white text-black focus:outline-none"
+              onkeyup="searchTable()"
+            />
+            <button
+              onclick="openAddModal()"
+              class="bg-blue-600 text-white px-4 py-2 rounded flex items-center gap-2"
+            >
+              <i class="fas fa-plus text-white"></i>
+              <span>Tambah Data</span>
+            </button>
+          </div>
+        </main>
+      </div>
+    </div>
+    <!-- Modal Tambah Data -->
+    <div
+      id="add-modal"
+      class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center"
+    >
+      <div class="bg-white p-6 rounded-lg shadow-lg w-1/2">
+        <h2 class="text-lg font-bold mb-4">Tambah Data</h2>
+        <form id="add-form">
+          <input
+            type="text"
+            id="namaAM"
+            placeholder="NAMA AM"
+            class="w-full p-2 border rounded mb-2"
+            required
+          />
+          <input
+            type="text"
+            id="namaCC"
+            placeholder="NAMA CC"
+            class="w-full p-2 border rounded mb-2"
+            required
+          />
+          <input
+            type="text"
+            id="subSegmen"
+            placeholder="SUBSEGMEN"
+            class="w-full p-2 border rounded mb-2"
+            required
+          />
+          <input
+            type="text"
+            id="namaGedung"
+            placeholder="NAMA GEDUNG / CONGLOMERATION"
+            class="w-full p-2 border rounded mb-2"
+            required
+          />
+          <input
+            type="text"
+            id="namaTenant"
+            placeholder="NAMA TENANT / PERUSAHAAN / ANAK PERUSAHAAN"
+            class="w-full p-2 border rounded mb-2"
+            required
+          />
+          <input
+            type="text"
+            id="layanan"
+            placeholder="LAYANAN EKSISTING"
+            class="w-full p-2 border rounded mb-2"
+            required
+          />
+          <input
+            type="text"
+            id="namaPIC"
+            placeholder="NAMA PIC TENANT / ANPRUS"
+            class="w-full p-2 border rounded mb-2"
+            required
+          />
+          <input
+            type="text"
+            id="jenisUsaha"
+            placeholder="JENIS USAHA"
+            class="w-full p-2 border rounded mb-2"
+            required
+          />
+          <input
+            type="text"
+            id="jabatanPIC"
+            placeholder="JABATAN PIC TENANT/ANPRUS"
+            class="w-full p-2 border rounded mb-2"
+            required
+          />
+          <input
+            type="text"
+            id="nipmas"
+            placeholder="ADA NIPMAS DI SEGMEN LAIN ATAU TIDAK"
+            class="w-full p-2 border rounded mb-2"
+            required
+          />
+          <input
+            type="text"
+            id="segmenMana"
+            placeholder="SEGMEN MANA"
+            class="w-full p-2 border rounded mb-2"
+            required
+          />
+          <div class="flex justify-end gap-3 mt-4">
+            <button
+              type="button"
+              onclick="closeAddModal()"
+              class="px-4 py-2 bg-gray-500 text-white rounded"
+            >
+              Batal
+            </button>
+            <button
+              type="submit"
+              class="px-4 py-2 bg-blue-600 text-white rounded"
+            >
+              Simpan
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal Edit Data -->
+    <div
+      id="edit-modal"
+      class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center"
+    >
+      <div class="bg-white p-6 rounded-lg shadow-lg w-1/2">
+        <h2 class="text-lg font-bold mb-4">Edit Data</h2>
+        <form id="edit-form">
+          <input type="hidden" id="edit-index" />
+          <input
+            type="text"
+            id="edit-namaAM"
+            class="w-full p-2 border rounded mb-2"
+            required
+          />
+          <input
+            type="text"
+            id="edit-namaCC"
+            class="w-full p-2 border rounded mb-2"
+            required
+          />
+          <input
+            type="text"
+            id="edit-subSegmen"
+            class="w-full p-2 border rounded mb-2"
+            required
+          />
+          <input
+            type="text"
+            id="edit-namaGedung"
+            class="w-full p-2 border rounded mb-2"
+            required
+          />
+          <input
+            type="text"
+            id="edit-namaTenant"
+            class="w-full p-2 border rounded mb-2"
+            required
+          />
+          <input
+            type="text"
+            id="edit-layanan"
+            class="w-full p-2 border rounded mb-2"
+            required
+          />
+          <input
+            type="text"
+            id="edit-namaPIC"
+            class="w-full p-2 border rounded mb-2"
+            required
+          />
+          <input
+            type="text"
+            id="edit-jenisUsaha"
+            class="w-full p-2 border rounded mb-2"
+            required
+          />
+          <input
+            type="text"
+            id="edit-jabatanPIC"
+            class="w-full p-2 border rounded mb-2"
+            required
+          />
+          <input
+            type="text"
+            id="edit-nipmas"
+            class="w-full p-2 border rounded mb-2"
+            required
+          />
+          <input
+            type="text"
+            id="edit-segmenMana"
+            class="w-full p-2 border rounded mb-2"
+            required
+          />
+          <div class="flex justify-end gap-3 mt-4">
+            <button
+              type="button"
+              onclick="closeEditModal()"
+              class="px-4 py-2 bg-gray-500 text-white rounded"
+            >
+              Batal
+            </button>
+            <button
+              type="submit"
+              class="px-4 py-2 bg-blue-600 text-white rounded"
+            >
+              Simpan
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script>
+      // Toggle Sidebar
+      function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        const mainContent = document.getElementById("main-content");
+        sidebar.classList.toggle("-ml-64");
+        mainContent.classList.toggle("ml-64");
+        mainContent.classList.toggle("w-full");
+      }
+
+      // Menampilkan modal tambah data
+      function openAddModal() {
+        document.getElementById("add-modal").classList.remove("hidden");
+      }
+
+      // Menutup modal tambah data
+      function closeAddModal() {
+        document.getElementById("add-modal").classList.add("hidden");
+      }
+
+      // Fungsi untuk menyimpan data sementara di localStorage
+      function saveData(event) {
+        event.preventDefault();
+
+        let data = JSON.parse(localStorage.getItem("listGedung")) || [];
+
+        let newData = {
+          namaAM: document.getElementById("namaAM").value,
+          namaCC: document.getElementById("namaCC").value,
+          subSegmen: document.getElementById("subSegmen").value,
+          namaGedung: document.getElementById("namaGedung").value,
+          namaTenant: document.getElementById("namaTenant").value,
+          layanan: document.getElementById("layanan").value,
+          namaPIC: document.getElementById("namaPIC").value,
+          jenisUsaha: document.getElementById("jenisUsaha").value,
+          jabatanPIC: document.getElementById("jabatanPIC").value,
+          nipmas: document.getElementById("nipmas").value,
+          segmenMana: document.getElementById("segmenMana").value,
+        };
+
+        data.push(newData);
+        localStorage.setItem("listGedung", JSON.stringify(data));
+
+        closeAddModal();
+        loadTable();
+      }
+
+      function searchTable() {
+        let input = document
+          .getElementById("search")
+          .value.trim()
+          .toLowerCase(); // Hapus spasi dan ubah ke huruf kecil
+        let rows = document.querySelectorAll("#visit-table tr");
+
+        rows.forEach((row) => {
+          let rowText = row.innerText.trim().toLowerCase(); // Ambil teks dalam baris dan ubah ke huruf kecil
+          let regex = new RegExp(`\\b${input}\\b`, "i"); // Buat regex agar cocok dengan kata lengkap
+
+          row.style.display =
+            rowText.includes(input) || regex.test(rowText) ? "" : "none";
+        });
+      }
+
+      // Fungsi untuk menampilkan data dalam tabel
+      function loadTable() {
+        let data = JSON.parse(localStorage.getItem("listGedung")) || [];
+        let tableBody = document.getElementById("visit-table");
+        tableBody.innerHTML = "";
+
+        data.forEach((item, index) => {
+          let row = `
+        <tr class="border-b">
+          <td class="p-3">${item.namaAM}</td>
+          <td class="p-3">${item.namaCC}</td>
+          <td class="p-3">${item.subSegmen}</td>
+          <td class="p-3">${item.namaGedung}</td>
+          <td class="p-3">${item.namaTenant}</td>
+          <td class="p-3">${item.layanan}</td>
+          <td class="p-3">${item.namaPIC}</td>
+          <td class="p-3">${item.jenisUsaha}</td>
+          <td class="p-3">${item.jabatanPIC}</td>
+          <td class="p-3">${item.nipmas}</td>
+          <td class="p-3">${item.segmenMana}</td>
+          <td class="p-3">
+            <button onclick="deleteData(${index})" class="text-red-600">Hapus</button>
+          </td>
+        </tr>
+      `;
+          tableBody.innerHTML += row;
+        });
+      }
+
+      // Fungsi untuk menghapus data dari tabel dan localStorage
+      function deleteData(index) {
+        let data = JSON.parse(localStorage.getItem("listGedung")) || [];
+        data.splice(index, 1);
+        localStorage.setItem("listGedung", JSON.stringify(data));
+        loadTable();
+      }
+
+      // Event Listener untuk menyimpan data saat form disubmit
+      document.getElementById("add-form").addEventListener("submit", saveData);
+
+      // Memuat data saat halaman pertama kali dibuka
+      window.onload = loadTable;
+
+      function openEditModal(index) {
+        let data = JSON.parse(localStorage.getItem("listGedung")) || [];
+        let item = data[index];
+        document.getElementById("edit-index").value = index;
+        document.getElementById("edit-namaAM").value = item.namaAM;
+        document.getElementById("edit-namaCC").value = item.namaCC;
+        document.getElementById("edit-subSegmen").value = item.subSegmen;
+        document.getElementById("edit-namaGedung").value = item.namaGedung;
+        document.getElementById("edit-namaTenant").value = item.namaTenant;
+        document.getElementById("edit-layanan").value = item.layanan;
+        document.getElementById("edit-namaPIC").value = item.namaPIC;
+        document.getElementById("edit-jenisUsaha").value = item.jenisUsaha;
+        document.getElementById("edit-jabatanPIC").value = item.jabatanPIC;
+        document.getElementById("edit-nipmas").value = item.nipmas;
+        document.getElementById("edit-segmenMana").value = item.segmenMana;
+        document.getElementById("edit-modal").classList.remove("hidden");
+      }
+
+      function closeEditModal() {
+        document.getElementById("edit-modal").classList.add("hidden");
+      }
+
+      function saveEditData(event) {
+        event.preventDefault();
+        let index = document.getElementById("edit-index").value;
+        let data = JSON.parse(localStorage.getItem("listGedung")) || [];
+        data[index] = {
+          namaAM: document.getElementById("edit-namaAM").value,
+          namaCC: document.getElementById("edit-namaCC").value,
+          subSegmen: document.getElementById("edit-subSegmen").value,
+          namaGedung: document.getElementById("edit-namaGedung").value,
+          namaTenant: document.getElementById("edit-namaTenant").value,
+          layanan: document.getElementById("edit-layanan").value,
+          namaPIC: document.getElementById("edit-namaPIC").value,
+          jenisUsaha: document.getElementById("edit-jenisUsaha").value,
+          jabatanPIC: document.getElementById("edit-jabatanPIC").value,
+          nipmas: document.getElementById("edit-nipmas").value,
+          segmenMana: document.getElementById("edit-segmenMana").value,
+        };
+        localStorage.setItem("listGedung", JSON.stringify(data));
+        closeEditModal();
+        loadTable();
+      }
+      document
+        .getElementById("edit-form")
+        .addEventListener("submit", saveEditData);
+
+      function loadTable() {
+        let data = JSON.parse(localStorage.getItem("listGedung")) || [];
+        let tableBody = document.getElementById("visit-table");
+        tableBody.innerHTML = "";
+
+        data.forEach((item, index) => {
+          let row = `
+            <tr class="border-b">
+              <td class="p-3">${item.namaAM}</td>
+              <td class="p-3">${item.namaCC}</td>
+              <td class="p-3">${item.subSegmen}</td>
+              <td class="p-3">${item.namaGedung}</td>
+              <td class="p-3">${item.namaTenant}</td>
+              <td class="p-3">${item.layanan}</td>
+              <td class="p-3">${item.namaPIC}</td>
+              <td class="p-3">${item.jenisUsaha}</td>
+              <td class="p-3">${item.jabatanPIC}</td>
+              <td class="p-3">${item.nipmas}</td>
+              <td class="p-3">${item.segmenMana}</td>
+              <td class="p-3">
+                <button onclick="openEditModal(${index})" class="bg-yellow-500 text-white px-3 py-1 rounded">Edit</button>
+                        <button onclick="deleteData(${index})" class="bg-red-500 text-white px-3 py-1 rounded">Hapus</button>
+              </td>
+            </tr>
+          `;
+          tableBody.innerHTML += row;
+        });
+      }
+    </script>
+  </body>
+</html>
