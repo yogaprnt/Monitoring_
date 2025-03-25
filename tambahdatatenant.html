@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tambah Data Tenant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100">
+    <header
+      class="bg-red-600 text-white flex items-center justify-between px-6 py-4 fixed w-full top-0 z-50"
+    >
+      <button
+        onclick="toggleSidebar()"
+        class="text-white text-2xl focus:outline-none"
+      >
+        ☰
+      </button>
+      <div class="flex items-center space-x-6">
+        <span>English</span>
+        <div class="flex items-center space-x-2">
+          <img
+            src="assets/profile.png"
+            class="rounded-full w-10 h-10"
+            alt="User Profile"
+          />
+          <span>Yoga Pranata (Admin)</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Wrapper untuk sidebar + konten -->
+    <div class="flex flex-col pt-16">
+      <!-- Sidebar -->
+      <aside
+        id="sidebar"
+        class="w-64 bg-[#E8E8E8] text-black flex flex-col fixed top-16 left-0 h-full transition-transform duration-300"
+      >
+        <div class="p-5 flex justify-center">
+          <img src="assets/logo.png" alt="Telkom Indonesia" class="h-20" />
+        </div>
+        <nav class="flex-1">
+          <ul>
+            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+              <a href="index.html">Dashboard</a>
+            </li>
+            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+              <a href="list.html">List Gedung</a>
+            </li>
+            <li class="px-5 py-3 bg-red-600 text-white rounded-lg mx-2">
+              <a href="tableTenants.html">List Tenant</a>
+            </li>
+            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+              <a href="worksheet.html">WORK SHEET</a>
+            </li>
+            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+              <a href="datavisit.html">Data Visit</a>
+            </li>
+            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+              <a href="#">Product Stock</a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <div
+        id="main-content"
+        class="flex-1 flex flex-col ml-64 p-6 mt-16"
+        style="padding-left: 2rem; padding-right: 2rem"
+      >
+        <h2 class="text-xl font-bold mb-4">Tambah Tenant</h2>
+
+        <!-- Form untuk menambah data tenant -->
+        <form
+          id="tenant-form"
+          class="bg-white shadow-md rounded-lg p-6 space-y-4"
+        >
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="mb-4">
+              <label
+                for="namaAM"
+                class="block text-sm font-medium text-gray-700"
+                >Nama AM</label
+              >
+              <select
+                id="namaAM"
+                class="w-full px-4 py-2 border rounded-md"
+                required
+              >
+                <option value="ALFI SHAFIRA KHAIRUNNISA">
+                  ALFI SHAFIRA KHAIRUNNISA
+                </option>
+                <option value="DIMAS GILANG ADI PRATOMO">
+                  DIMAS GILANG ADI PRATOMO
+                </option>
+                <option value="INDRA BACHTIAR ROBBYATULLOH">
+                  INDRA BACHTIAR ROBBYATULLOH
+                </option>
+                <option value="LULU HANIFAH">LULU HANIFAH</option>
+                <option value="MAR'ATUS SHOLICHA">MAR'ATUS SHOLICHA</option>
+                <option value="MEIKA ANDIANI">MEIKA ANDIANI</option>
+                <option value="MOCHAMAD FAROQ">MOCHAMAD FAROQ</option>
+                <option value="MUHAMAD FAHRUROZI">MUHAMAD FAHRUROZI</option>
+                <option value="MUHAMMAD IKHSAN">MUHAMMAD IKHSAN</option>
+                <option value="MUHAMMAD NIMRAN SALADIN">
+                  MUHAMMAD NIMRAN SALADIN
+                </option>
+                <option value="NAMIRAH MAULIDINA">NAMIRAH MAULIDINA</option>
+                <option value="NISA SOFNIA">NISA SOFNIA</option>
+                <option value="NURUL ALFIAH">NURUL ALFIAH</option>
+                <option value="RIKI PURWANTO">RIKI PURWANTO</option>
+                <option value="THASYA PUTRI">THASYA PUTRI</option>
+              </select>
+            </div>
+
+            <!-- Dropdown untuk Nama CC -->
+            <div class="mb-4">
+              <label
+                for="namaCC"
+                class="block text-sm font-medium text-gray-700"
+                >Nama CC</label
+              >
+              <select
+                id="namaCC"
+                class="w-full px-4 py-2 border rounded-md"
+                required
+              >
+                <option value="ADARO INDONESIA PT">ADARO INDONESIA PT</option>
+                <option value="AGUNG SEDAYU PROPERTINDO">
+                  AGUNG SEDAYU PROPERTINDO
+                </option>
+                <option value="ARTHA TELEKOMINDO">ARTHA TELEKOMINDO</option>
+                <option value="ASIAN AGRI ABADI GROUP">
+                  ASIAN AGRI ABADI GROUP
+                </option>
+                <option value="AUSTINDO NUSANTARA JAYA AGRI PT">
+                  AUSTINDO NUSANTARA JAYA AGRI PT
+                </option>
+                <option value="DONGGI SENORO LNG">DONGGI SENORO LNG</option>
+                <option value="KUALA LUMPUR KEPONG BERHAD">
+                  KUALA LUMPUR KEPONG BERHAD
+                </option>
+                <option value="NUSA HALMAHERA MINERAL PT">
+                  NUSA HALMAHERA MINERAL PT
+                </option>
+                <option value="PERMATA SENAYAN (ARTHATEL)">
+                  PERMATA SENAYAN (ARTHATEL)
+                </option>
+                <option value="PT TANJUNG BUYU PERKASA PLANTATION">
+                  PT TANJUNG BUYU PERKASA PLANTATION
+                </option>
+                <option value="PT WONOKOYO JAYA CORPORINDO">
+                  PT WONOKOYO JAYA CORPORINDO
+                </option>
+                <option value="RIAU ANDALAN PULP & PAPER">
+                  RIAU ANDALAN PULP & PAPER
+                </option>
+                <option value="WILMAR, PT">WILMAR, PT</option>
+                <option value="ADHIBALADIKA AGUNG">ADHIBALADIKA AGUNG</option>
+                <option value="ADITYA TOA DEV / MENARA THAMRIN">
+                  ADITYA TOA DEV / MENARA THAMRIN
+                </option>
+                <option value="AGRI MULTI LESTARI PT">
+                  AGRI MULTI LESTARI PT
+                </option>
+                <option value="AGRINUSA JAYA SANTOSA PT">
+                  AGRINUSA JAYA SANTOSA PT
+                </option>
+              </select>
+            </div>
+
+            <!-- Dropdown untuk EOS -->
+            <div class="mb-4">
+              <label for="eos" class="block text-sm font-medium text-gray-700"
+                >EOS</label
+              >
+              <select
+                id="eos"
+                class="w-full px-4 py-2 border rounded-md"
+                required
+              >
+                <option value="ADA">Ada</option>
+                <option value="TIDAK ADA">Tidak Ada</option>
+              </select>
+            </div>
+            <!-- Dropdown untuk FO / MSAN-->
+            <div class="mb-4">
+              <label for="foMSAN" class="block text-sm font-medium text-gray-700"
+                >FO / MSAN</label
+              >
+              <select
+                id="foMSAN"
+                class="w-full px-4 py-2 border rounded-md"
+                required
+              >
+                <option value="MSAN">MSAN</option>
+                <option value="TIDAK ADA">Tidak Ada</option>
+                <option value="FO">FO</option>
+                <option value="FO & MSAN">FO & MSAN</option>
+              </select>
+            </div>
+
+            <!-- Other form fields as required -->
+            <div class="mb-4">
+              <label
+                for="subsegmen"
+                class="block text-sm font-medium text-gray-700"
+                >Subsegmen</label
+              >
+              <select 
+  id="subsegmen"
+  class="w-full px-4 py-2 border rounded-md"
+  required
+>
+  <option value="mining_utilities">Mining & Utilities</option>
+  <option value="building_construction">Building & Construction</option>
+  <option value="agriculture_farm">Agriculture & Farm</option>
+  <option value="industrial_park_port_management">Industrial Park & Port Management</option>
+  <option value="hospitality_transport">Hospitality & Transport</option>
+  <option value="resto_retailer">Resto & Retailer</option>
+  <option value="manufacture_service">Manufacture Service</option>
+  <option value="logistic_service">Logistic Service</option>
+  <option value="media_telecommunication">Media & Telecommunication</option>
+  <option value="discrete_manufacturing">Discrete Manufacturing</option>
+  <option value="process_manufacturing">Process Manufacturing</option>
+  <option value="distributor_professional">Distributor & Professional</option>
+</select>
+
+              
+            </div>
+
+            <div class="mb-4">
+              <label
+                for="namaGedung"
+                class="block text-sm font-medium text-gray-700"
+                >Nama Gedung / Conglomeration</label
+              >
+              <select
+                id="namaGedung"
+                class="w-full px-4 py-2 border rounded-md"
+                required
+              />
+              <option value="AGRO PLAZA">AGRO PLAZA</option>
+<option value="AIA CENTRAL">AIA CENTRAL</option>
+<option value="AKR TOWER">AKR TOWER</option>
+<option value="APL TOWER">APL TOWER</option>
+<option value="ARCADIA TOWER B">ARCADIA TOWER B</option>
+<option value="ARCADIA TOWER C">ARCADIA TOWER C</option>
+<option value="ARCADIA TOWER D">ARCADIA TOWER D</option>
+<option value="ARCADIA TOWER E">ARCADIA TOWER E</option>
+<option value="ARCADIA TOWER F">ARCADIA TOWER F</option>
+<option value="ARCADIA TOWER G">ARCADIA TOWER G</option>
+<option value="ASG TOWER">ASG TOWER</option>
+<option value="ATRIA @ SUDIRMAN">ATRIA @ SUDIRMAN</option>
+<option value="AYANA MIDPLAZA HOTEL">AYANA MIDPLAZA HOTEL</option>
+<option value="BAYWALK APARTMENT">BAYWALK APARTMENT</option>
+<option value="BAYWALK MALL">BAYWALK MALL</option>
+<option value="Branz Mega Kuningan">Branz Mega Kuningan</option>
+<option value="BURSA EFEK INDONESIA">BURSA EFEK INDONESIA</option>
+<option value="CENTENNIAL TOWER">CENTENNIAL TOWER</option>
+<option value="CENTRAL PARK MALL">CENTRAL PARK MALL</option>
+<option value="CHAROEN POKPHAND INDONESIA PT">CHAROEN POKPHAND INDONESIA PT</option>
+<option value="CHASE PLAZA">CHASE PLAZA</option>
+<option value="CIBIS EIGHT">CIBIS EIGHT</option>
+<option value="CIBIS NINE">CIBIS NINE</option>
+<option value="CIPUTRA INTERNATIONAL">CIPUTRA INTERNATIONAL</option>
+<option value="CONTROL BUILDING SCBD DATA CENTER">CONTROL BUILDING SCBD DATA CENTER</option>
+<option value="DBS TOWER">DBS TOWER</option>
+<option value="DIPO TOWER">DIPO TOWER</option>
+<option value="DISTRICT 8">DISTRICT 8</option>
+<option value="ELECTRONIC CITY SCBD">ELECTRONIC CITY SCBD</option>
+<option value="EMPORIUM PLUIT MALL">EMPORIUM PLUIT MALL</option>
+<option value="GAMA TOWER">GAMA TOWER</option>
+<option value="GANDARIA CITY MALL">GANDARIA CITY MALL</option>
+<option value="GANDARIA HEIGHTS APT">GANDARIA HEIGHTS APT</option>
+<option value="GANDARIA OFFICE 8">GANDARIA OFFICE 8</option>
+<option value="GEDUNG A LOT 18">GEDUNG A LOT 18</option>
+<option value="GEDUNG ARTHA GRAHA">GEDUNG ARTHA GRAHA</option>
+<option value="GEDUNG B LOT 18">GEDUNG B LOT 18</option>
+<option value="GEDUNG BANK PANIN">GEDUNG BANK PANIN</option>
+<option value="GEDUNG BEJ">GEDUNG BEJ</option>
+<option value="GEDUNG C LOT 18">GEDUNG C LOT 18</option>
+<option value="GEDUNG D LOT 18">GEDUNG D LOT 18</option>
+<option value="GEDUNG E LOT 18">GEDUNG E LOT 18</option>
+<option value="GEDUNG EQUITY TOWER">GEDUNG EQUITY TOWER</option>
+<option value="GEDUNG F LOT 18">GEDUNG F LOT 18</option>
+<option value="Gedung PCPD SCBD">Gedung PCPD SCBD</option>
+<option value="GEDUNG SUMMITMAS I (20 LANTAI) DAN II (19 LANTAI)">GEDUNG SUMMITMAS I (20 LANTAI) DAN II (19 LANTAI)</option>
+<option value="GEDUNG THE EAST">GEDUNG THE EAST</option>
+<option value="GEDUNG WTC 1">GEDUNG WTC 1</option>
+<option value="GEDUNG WTC 2">GEDUNG WTC 2</option>
+<option value="GEDUNG WTC 3">GEDUNG WTC 3</option>
+<option value="GEDUNG WTC 5">GEDUNG WTC 5</option>
+<option value="GEDUNG WTC 6">GEDUNG WTC 6</option>
+<option value="GOLD COAST OFFICE">GOLD COAST OFFICE</option>
+<option value="Graha Corner Stone">Graha Corner Stone</option>
+<option value="GRAHA NIAGA TATA UTAMA">GRAHA NIAGA TATA UTAMA</option>
+<option value="GRAHA SAPTAINDRA">GRAHA SAPTAINDRA</option>
+<option value="GRHA INTIRUB">GRHA INTIRUB</option>
+<option value="INDY BINTARO OFFICE PARK">INDY BINTARO OFFICE PARK</option>
+<option value="INTERNATIONAL FINANCIAL CENTER">INTERNATIONAL FINANCIAL CENTER</option>
+<option value="INTILAND TOWER">INTILAND TOWER</option>
+<option value="JAPFA COMFEED INDONESIA">JAPFA COMFEED INDONESIA</option>
+<option value="JB TOWER (REGUS)">JB TOWER (REGUS)</option>
+<option value="Kantor POM Green Lake City">Kantor POM Green Lake City</option>
+<option value="Kantor Town Mgt PIK">Kantor Town Mgt PIK</option>
+<option value="LOT 19">LOT 19</option>
+<option value="LOTTE SHOPPING AVENUE">LOTTE SHOPPING AVENUE</option>
+<option value="MALL ALAM SUTERA">MALL ALAM SUTERA</option>
+<option value="MALL CIPUTRA JAKARTA">MALL CIPUTRA JAKARTA</option>
+<option value="MALL KOTA KASABLANKA">MALL KOTA KASABLANKA</option>
+<option value="MAYAPADA TOWER 1">MAYAPADA TOWER 1</option>
+<option value="MAYAPADA TOWER 2">MAYAPADA TOWER 2</option>
+<option value="MEGA PLAZA">MEGA PLAZA</option>
+<option value="MENARA BATAVIA">MENARA BATAVIA</option>
+<option value="MENARA BPJAMSOSTEK TOWER UTARA DAN SELATAN">MENARA BPJAMSOSTEK TOWER UTARA DAN SELATAN</option>
+<option value="MENARA IMPERIUM">MENARA IMPERIUM</option>
+<option value="MENARA KADIN">MENARA KADIN</option>
+<option value="MENARA KARYA">MENARA KARYA</option>
+<option value="MENARA MATAHARI">MENARA MATAHARI</option>
+<option value="MENARA RAJAWALI">MENARA RAJAWALI</option>
+<option value="MENARA THAMRIN">MENARA THAMRIN</option>
+<option value="METROPOLITAN TOWER">METROPOLITAN TOWER</option>
+<option value="MIDPLAZA 1">MIDPLAZA 1</option>
+<option value="MIDPLAZA 2">MIDPLAZA 2</option>
+<option value="MSIG TOWER">MSIG TOWER</option>
+<option value="NHM OFFICE PLUIT">NHM OFFICE PLUIT</option>
+<option value="OFFICE 8">OFFICE 8</option>
+<option value="OFFICE 88 KOKAS">OFFICE 88 KOKAS</option>
+<option value="Others - Ruko Summarecon">Others - Ruko Summarecon</option>
+<option value="PAKUWON MALL BEKASI">PAKUWON MALL BEKASI</option>
+<option value="PAKUWON TOWER">PAKUWON TOWER</option>
+<option value="PLAZA KUNINGAN MENARA SELATAN">PLAZA KUNINGAN MENARA SELATAN</option>
+<option value="PLAZA KUNINGAN MENARA UTARA">PLAZA KUNINGAN MENARA UTARA</option>
+<option value="PLAZA OLEOS">PLAZA OLEOS</option>
+<option value="PONDOK INDAH OFFICE TOWER">PONDOK INDAH OFFICE TOWER</option>
+<option value="PONDOK INDAH OFFICE TOWER 1">PONDOK INDAH OFFICE TOWER 1</option>
+<option value="PONDOK INDAH OFFICE TOWER 2">PONDOK INDAH OFFICE TOWER 2</option>
+<option value="PONDOK INDAH OFFICE TOWER 3">PONDOK INDAH OFFICE TOWER 3</option>
+<option value="PONDOK INDAH OFFICE TOWER 5">PONDOK INDAH OFFICE TOWER 5</option>
+<option value="PONDOK INDAH OFFICE TOWER 6">PONDOK INDAH OFFICE TOWER 6</option>
+<option value="PRESIDENT UNIVERSITY">PRESIDENT UNIVERSITY</option>
+<option value="PROSPERITY TOWER">PROSPERITY TOWER</option>
+<option value="PRUDENTIAL CENTRE">PRUDENTIAL CENTRE</option>
+<option value="PRUDENTIAL TOWER">PRUDENTIAL TOWER</option>
+<option value="PT Bangun loka Indah/ PULLMAN CIAWI">PT Bangun loka Indah/ PULLMAN CIAWI</option>
+<option value="PT. BEKASI FAJAR INDUSTRIAL ESTATE (BEFA)">PT. BEKASI FAJAR INDUSTRIAL ESTATE (BEFA)</option>
+<option value="PT. MEGALOPOLIS MANUNGGAL INDUSTRIAL DEVELOPMENT (MMID)">PT. MEGALOPOLIS MANUNGGAL INDUSTRIAL DEVELOPMENT (MMID)</option>
+<option value="RAFFLES JAKARTA">
+            </select>
+            </div>
+
+            <div class="mb-4">
+              <label
+                for="jumlahTenant"
+                class="block text-sm font-medium text-gray-700"
+                >Jumlah Tenant</label
+              >
+              <input
+                type="number"
+                id="jumlahTenant"
+                class="w-full px-4 py-2 border rounded-md"
+                required
+              />
+            </div>
+
+            <div class="mb-4">
+              <label
+                for="jumlahLantai"
+                class="block text-sm font-medium text-gray-700"
+                >Jumlah Lantai Gedung</label
+              >
+              <input
+                type="number"
+                id="jumlahLantai"
+                class="w-full px-4 py-2 border rounded-md"
+                required
+              />
+            </div>
+
+            <div class="mb-4">
+              <label for="pks" class="block text-sm font-medium text-gray-700"
+                >Ada PKS atau Tidak</label
+              >
+              <select
+                id="pks"
+                class="w-full px-4 py-2 border rounded-md"
+                required
+              >
+                <option value="ADA">ADA</option>
+                <option value="TIDAK ADA">TIDAK ADA</option>
+                
+              </select>
+            </div>
+
+            <div class="mb-4">
+              <label
+                for="jenisPKS"
+                class="block text-sm font-medium text-gray-700"
+                >Jenis PKS</label
+              >
+              <select
+                id="jenisPKS"
+                class="w-full px-4 py-2 border rounded-md"
+                required
+              />
+              <option value=""> </option> 
+              <option value="REVENUE SHARING">REVENUE SHARING</option> 
+            </select>
+            </div>
+
+            <div class="mb-4">
+              <label
+                for="namaInfluencer"
+                class="block text-sm font-medium text-gray-700"
+                >Nama Influencer</label
+              >
+              <select
+                id="namaInfluencer"
+                class="w-full px-4 py-2 border rounded-md"
+                required
+              />
+              <option value="AGUS PURNOMO">AGUS PURNOMO</option>
+<option value="AJI KUNCORO">AJI KUNCORO</option>
+<option value="ANA RUSTIANA">ANA RUSTIANA</option>
+<option value="ANTHONY">ANTHONY</option>
+<option value="ARI">ARI</option>
+<option value="ARIYO">ARIYO</option>
+<option value="ARMAN">ARMAN</option>
+<option value="ARUM">ARUM</option>
+              </select>
+            </div>
+
+            <div class="mb-4">
+              <label
+                for="jabatanInfluencer"
+                class="block text-sm font-medium text-gray-700"
+                >Jabatan Influencer</label
+              >
+              <select
+                id="jabatanInfluencer"
+                class="w-full px-4 py-2 border rounded-md"
+                required
+              />
+              <option value="BM">BM</option>
+<option value="BOD">BOD</option>
+<option value="ENGINEER">ENGINEER</option>
+<option value="FINANCE">FINANCE</option>
+<option value="GENERAL AFFAIR (GA)">GENERAL AFFAIR (GA)</option>
+<option value="GM">GM</option>
+<option value="IT">IT</option>
+<option value="SALES/MKT">SALES/MKT</option>
+<option value="TENANT RELATION">TENANT RELATION</option>
+<option value="PROCUREMENT">PROCUREMENT</option>
+</select>
+            </div>
+
+            <div class="mb-4">
+              <label
+                for="decisionMaker"
+                class="block text-sm font-medium text-gray-700"
+                >Decision Maker</label
+              >
+              <input
+                type="text"
+                id="decisionMaker"
+                class="w-full px-4 py-2 border rounded-md"
+                required
+              />
+            </div>
+
+            <div class="mb-4">
+              <label
+                for="statusVisit"
+                class="block text-sm font-medium text-gray-700"
+                >Status Visit</label
+              >
+              <select
+                id="statusVisit"
+                class="w-full px-4 py-2 border rounded-md"
+                required
+              />
+              <option value="DONE VISIT ALL TENANT">DONE VISIT ALL TENANT</option>
+<option value="OGP">OGP</option>
+<option value="BELUM VISIT">BELUM VISIT</option>
+            </select>
+            </div>
+
+            <div class="mb-4">
+              <label
+                for="jumlahTenantVisit"
+                class="block text-sm font-medium text-gray-700"
+                >Jumlah Tenant Sudah Diperbarui</label
+              >
+              <input
+                type="number"
+                id="jumlahTenantVisit"
+                class="w-full px-4 py-2 border rounded-md"
+                required
+              />
+            </div>
+
+            <div class="mb-4">
+              <label
+                for="progress"
+                class="block text-sm font-medium text-gray-700"
+                >Progress (%)</label
+              >
+              <input
+                type="number"
+                id="progress"
+                class="w-full px-4 py-2 border rounded-md"
+                required
+              />
+            </div>
+
+            <div class="mb-4">
+              <label for="note" class="block text-sm font-medium text-gray-700"
+                >Note Gedung / Tenant</label
+              >
+              <input
+                type="text"
+                id="note"
+                class="w-full px-4 py-2 border rounded-md"
+                required
+              />
+            </div>
+
+            <div class="flex justify-end">
+              <button
+                type="submit"
+                class="bg-blue-500 text-white px-4 py-2 rounded-md"
+              >
+                Simpan
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      document
+      .getElementById("tenant-form")
+      .addEventListener("submit", function (event) {
+        event.preventDefault();
+        const tenant = {
+          namaAM: document.getElementById("namaAM").value,
+          namaCC: document.getElementById("namaCC").value,
+          eos: document.getElementById("eos").value,
+          foMSAN: document.getElementById("foMSAN").value, 
+          subsegmen: document.getElementById("subsegmen").value,
+          namaGedung: document.getElementById("namaGedung").value,
+          jumlahTenant: document.getElementById("jumlahTenant").value,
+          jumlahLantai: document.getElementById("jumlahLantai").value,
+          pks: document.getElementById("pks").value,
+          jenisPKS: document.getElementById("jenisPKS").value,
+          namaInfluencer: document.getElementById("namaInfluencer").value,
+          jabatanInfluencer: document.getElementById("jabatanInfluencer").value,
+          decisionMaker: document.getElementById("decisionMaker").value,
+          statusVisit: document.getElementById("statusVisit").value,
+          jumlahTenantVisit: document.getElementById("jumlahTenantVisit").value,
+          progress: document.getElementById("progress").value,
+          note: document.getElementById("note").value,
+        };
+    
+        // Menyimpan data ke localStorage
+        let tenants = JSON.parse(localStorage.getItem("tenants")) || [];
+        tenants.push(tenant);
+        localStorage.setItem("tenants", JSON.stringify(tenants));
+    
+        // Redirect kembali ke halaman utama setelah data ditambah
+        window.location.href = "tableTenants.html";
+      });
+    
+    </script>
+  </body>
+</html>
+  </body>
+</html>
