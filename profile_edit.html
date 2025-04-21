@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <link rel="website icon" type="png" href="assets/logo_prscope.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100">
+    <!-- Navbar -->
+    <header
+      class="bg-red-600 text-white flex items-center justify-between px-6 py-4 fixed w-full top-0 z-50"
+    >
+      <div class="flex items-center space-x-4">
+        <button
+          onclick="toggleSidebar()"
+          class="text-white text-2xl focus:outline-none"
+        >
+          ☰
+        </button>
+      </div>
+      <div class="flex items-center space-x-6">
+        <span class="relative">
+          <span
+            class="absolute -top-2 -right-2 bg-blue-600 text-white text-xs px-2 rounded-full"
+            >6</span
+          >
+          🔔
+        </span>
+        <span>English</span>
+        <div class="flex items-center space-x-2">
+          <img
+            src="assets/profile.png"
+            class="rounded-full w-10 h-10"
+            alt="User Profile"
+          />
+          <span>Yoga Pranata (Admin)</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="flex min-h-screen pt-16">
+      <!-- Sidebar -->
+      <aside
+        id="sidebar"
+        class="w-64 bg-[#E8E8E8] text-black flex flex-col fixed top-16 left-0 h-[calc(100vh-4rem)] justify-between overflow-y-auto transition-transform duration-300"
+      >
+        <div>
+          <div class="p-5 flex justify-center border-b border-gray-300">
+            <img
+              src="assets/logo_prscope.png"
+              alt="Telkom Indonesia"
+              class="h-20"
+            />
+          </div>
+          <nav>
+            <ul class="mt-4">
+              <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+                <a href="index.html">Dashboard</a>
+              </li>
+              <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+                <a href="list.html">List Gedung</a>
+              </li>
+              <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+                <a href="tenant.html">List Tenant</a>
+              </li>
+              <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+                <a href="datavisit.html">Data Visit</a>
+              </li>
+              <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+                <a href="worksheet.html">Work Sheet</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="mb-6 border-t border-gray-300 px-5 pt-4">
+          <a
+            href="setting.html"
+            class="block text-center bg-red-600 text-white font-medium rounded-md py-2 mb-2 hover:bg-red-700 transition"
+            >setting</a
+          >
+          <a
+            href="login.html"
+            onclick="return confirmLogout()"
+            class="block text-center text-black hover:underline"
+            >Logout</a
+          >
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main id="main-content" class="flex-1 ml-64 p-6">
+        <h1 class="text-3xl font-bold mb-6">Account Settings</h1>
+
+        <div class="bg-white rounded-lg shadow-md p-8 space-y-8">
+          <!-- Photo Section -->
+          <div
+            class="flex flex-col md:flex-row items-center md:items-start gap-6"
+          >
+            <img
+              src="assets/profile.png"
+              alt="Profile Picture"
+              class="w-24 h-24 rounded-full object-cover"
+            />
+            <div class="flex gap-4">
+              <button
+                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md shadow"
+              >
+                Change Photo
+              </button>
+              <button
+                class="bg-gray-200 hover:bg-gray-300 text-black px-4 py-2 rounded-md shadow"
+              >
+                Remove
+              </button>
+            </div>
+          </div>
+
+          <!-- Form Fields -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-gray-700 font-medium mb-1"
+                >Full Name</label
+              >
+              <input
+                type="text"
+                id="fullName"
+                class="w-full bg-gray-100 rounded-md p-3 text-base"
+              />
+            </div>
+            <div>
+              <label class="block text-gray-700 font-medium mb-1"
+                >Username</label
+              >
+              <input
+                type="text"
+                id="username"
+                class="w-full bg-gray-100 rounded-md p-3 text-base"
+              />
+            </div>
+            <div>
+              <label class="block text-gray-700 font-medium mb-1">Gender</label>
+              <select
+                id="gender"
+                class="w-full bg-gray-100 rounded-md p-3 text-base"
+              >
+                <option value="">Pilih Gender</option>
+                <option value="Laki - Laki">Laki - Laki</option>
+                <option value="Perempuan">Perempuan</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-gray-700 font-medium mb-1"
+                >Country</label
+              >
+              <select
+                id="country"
+                class="w-full bg-gray-100 rounded-md p-3 text-base"
+              >
+                <option value="">Pilih Negara</option>
+                <option value="Indonesia">Indonesia</option>
+                <option value="Malaysia">Malaysia</option>
+                <option value="Singapura">Singapura</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-gray-700 font-medium mb-1">NIP</label>
+              <input
+                type="text"
+                id="nip"
+                class="w-full bg-gray-100 rounded-md p-3 text-base"
+              />
+            </div>
+            <div>
+              <label class="block text-gray-700 font-medium mb-1"
+                >Time Zone</label
+              >
+              <select
+                id="timeZone"
+                class="w-full bg-gray-100 rounded-md p-3 text-base"
+              >
+                <option value="">Pilih Zona Waktu</option>
+                <option value="WIB">WIB</option>
+                <option value="WITA">WITA</option>
+                <option value="WIT">WIT</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-gray-700 font-medium mb-1">Email</label>
+              <input
+                type="email"
+                id="email"
+                class="w-full bg-gray-100 rounded-md p-3 text-base"
+              />
+            </div>
+            <div>
+              <label class="block text-gray-700 font-medium mb-1">Phone</label>
+              <input
+                type="text"
+                id="phone"
+                class="w-full bg-gray-100 rounded-md p-3 text-base"
+              />
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex justify-end space-x-4 pt-4 border-t border-gray-200">
+            <button
+              onclick="window.location.href='profile.html'"
+              class="bg-gray-200 hover:bg-gray-300 text-black px-6 py-2 rounded-md"
+            >
+              Cancel
+            </button>
+            <button
+              onclick="saveProfileData()"
+              class="bg-green-600 text-white px-6 py-2 rounded-md shadow hover:bg-green-700"
+            >
+              Save Changes
+            </button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      // Toggle Sidebar
+      function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        const mainContent = document.getElementById("main-content");
+        sidebar.classList.toggle("-translate-x-full");
+        mainContent.classList.toggle("ml-64");
+      }
+
+      // Logout Confirmation
+      function confirmLogout() {
+        return confirm("Apakah Anda yakin ingin logout?");
+      }
+
+      // Simpan data ke localStorage
+      function saveProfileData() {
+        const data = {
+          fullName: document.getElementById("fullName").value,
+          username: document.getElementById("username").value,
+          gender: document.getElementById("gender").value,
+          country: document.getElementById("country").value,
+          nip: document.getElementById("nip").value,
+          timeZone: document.getElementById("timeZone").value,
+          email: document.getElementById("email").value,
+          phone: document.getElementById("phone").value,
+        };
+
+        localStorage.setItem("profileData", JSON.stringify(data));
+        alert("Perubahan berhasil disimpan!");
+        window.location.href = "setting.html";
+      }
+
+      function loadProfileData() {
+        const data = JSON.parse(localStorage.getItem("profileData"));
+        if (data) {
+          document.getElementById("fullName").value = data.fullName;
+          document.getElementById("username").value = data.username;
+          document.getElementById("gender").value = data.gender;
+          document.getElementById("country").value = data.country;
+          document.getElementById("nip").value = data.nip;
+          document.getElementById("timeZone").value = data.timeZone;
+          document.getElementById("email").value = data.email;
+          document.getElementById("phone").value = data.phone;
+        }
+      }
+
+      // Jalankan saat halaman dimuat
+      window.onload = loadProfileData;
+    </script>
+  </body>
+</html>

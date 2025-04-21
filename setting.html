@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Setting</title>
+    <link rel="website icon" type="png" href="assets/logo_prscope.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .dark {
+        background-color: #1a202c;
+        color: #cbd5e0;
+      }
+      .dark .bg-red-600 {
+        background-color: #2d3748;
+      }
+      .dark .bg-gray-100 {
+        background-color: #2d3748;
+      }
+      .dark .bg-gray-300 {
+        background-color: #4a5568;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <!-- Navbar -->
+    <header
+      class="bg-red-600 text-white flex items-center justify-between px-6 py-4 fixed w-full top-0 z-50"
+    >
+      <div class="flex items-center space-x-4">
+        <button
+          onclick="toggleSidebar()"
+          class="text-white text-2xl focus:outline-none"
+        >
+          ☰
+        </button>
+        <button
+          onclick="toggleDarkMode()"
+          class="text-white text-lg focus:outline-none"
+        >
+          🌙
+        </button>
+      </div>
+      <div class="flex items-center space-x-6">
+        <span class="relative">
+          <span
+            class="absolute -top-2 -right-2 bg-blue-600 text-white text-xs px-2 rounded-full"
+            >6</span
+          >
+          🔔
+        </span>
+        <select class="bg-transparent text-white">
+          <option>English</option>
+          <option>Indonesia</option>
+        </select>
+        <div class="flex items-center space-x-2">
+          <img
+            src="assets/profile.png"
+            class="rounded-full w-10 h-10"
+            alt="User Profile"
+          />
+          <span>Yoga Pranata (Admin)</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="flex min-h-screen">
+      <!-- Sidebar -->
+      <aside
+        id="sidebar"
+        class="w-64 bg-[#E8E8E8] text-black flex flex-col fixed top-16 left-0 h-[calc(100vh-4rem)] justify-between overflow-y-auto transition-transform duration-300"
+      >
+        <div>
+          <div class="p-5 flex justify-center border-b border-gray-300">
+            <img src="assets/logo_prscope.png" alt="Telkom Indonesia" class="h-20" />
+          </div>
+          <nav>
+            <ul class="mt-4">
+              <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+                <a href="index.html">Dashboard</a>
+              </li>
+              <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+                <a href="list.html">List Gedung</a>
+              </li>
+              <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+                <a href="tenant.html">List Tenant</a>
+              </li>
+              <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+                <a href="datavisit.html">Data Visit</a>
+              </li>
+              <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+                <a href="worksheet.html">Work Sheet</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="mb-6 border-t border-gray-300 px-5 pt-4">
+          <a
+            href="setting.html"
+            class="block text-center bg-red-600 text-white font-medium rounded-md py-2 mb-2 hover:bg-red-700 transition"
+            >Setting</a
+          >
+          <a
+            href="login.html"
+            onclick="return confirmLogout()"
+            class="block text-center text-black hover:underline"
+            >Logout</a
+          >
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main id="main-content" class="flex-1 ml-64 mt-16 p-6">
+        <h1 class="text-3xl font-semibold mb-6">Pengaturan</h1>
+        <div class="flex flex-wrap gap-4">
+          <button
+            onclick="showContent('akun', event)"
+            class="tab-btn px-4 py-2 rounded-lg bg-red-100 text-black font-semibold"
+          >
+            Akun
+          </button>
+          <button
+            onclick="showContent('notifikasi', event)"
+            class="tab-btn px-4 py-2 rounded-lg bg-white text-black font-semibold"
+          >
+            Notifikasi
+          </button>
+          <button
+            onclick="showContent('keamanan', event)"
+            class="tab-btn px-4 py-2 rounded-lg bg-white text-black font-semibold"
+          >
+            Keamanan
+          </button>
+          <button
+            onclick="showContent('tentang', event)"
+            class="tab-btn px-4 py-2 rounded-lg bg-white text-black font-semibold"
+          >
+            Tentang
+          </button>
+        </div>
+        
+
+        <!-- Konten Dinamis -->
+        <div id="akun" class="content-section">
+          <div class="mb-6"></div>
+
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <div class="flex items-center space-x-4 mb-6">
+              <img
+                src="assets/profile.png"
+                alt="Profile"
+                class="w-20 h-20 rounded-full object-cover"
+              />
+              <div>
+                <h2 class="text-lg font-semibold">Yoga Pranata</h2>
+                <p class="text-gray-600">YogaXXXX@gmail.com</p>
+              </div>
+              <a href="profile_edit.html">
+                <button
+                  class="ml-auto bg-gray-200 hover:bg-gray-300 text-sm px-4 py-2 rounded-lg flex items-center space-x-2"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M15.232 5.232l3.536 3.536M9 11l6-6 3 3-6 6H9v-3z"
+                    ></path>
+                  </svg>
+                  <span>Edit</span>
+                </button>
+              </a>
+            </div>
+        
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-gray-600 mb-1">Full Name</label>
+                <input
+                  type="text"
+                  value="Yoga Pranata"
+                  disabled
+                  class="w-full bg-gray-100 px-4 py-2 rounded-lg"
+                />
+              </div>
+              <div>
+                <label class="block text-gray-600 mb-1">Username</label>
+                <input
+                  type="text"
+                  value="YogaXXXX"
+                  disabled
+                  class="w-full bg-gray-100 px-4 py-2 rounded-lg"
+                />
+              </div>
+              <div>
+                <label class="block text-gray-600 mb-1">Gender</label>
+                <input
+                  type="text"
+                  value="Laki - Laki"
+                  disabled
+                  class="w-full bg-gray-100 px-4 py-2 rounded-lg"
+                />
+              </div>
+              <div>
+                <label class="block text-gray-600 mb-1">Country</label>
+                <input
+                  type="text"
+                  value="Indonesia"
+                  disabled
+                  class="w-full bg-gray-100 px-4 py-2 rounded-lg"
+                />
+              </div>
+              <div>
+                <label class="block text-gray-600 mb-1">NIP</label>
+                <input
+                  type="text"
+                  value="49123XXXX"
+                  disabled
+                  class="w-full bg-gray-100 px-4 py-2 rounded-lg"
+                />
+              </div>
+              <div>
+                <label class="block text-gray-600 mb-1">Time Zone</label>
+                <input
+                  type="text"
+                  value="JKT XXX"
+                  disabled
+                  class="w-full bg-gray-100 px-4 py-2 rounded-lg"
+                />
+              </div>
+        
+              <!-- Email -->
+              <div>
+                <label class="block text-gray-600 mb-1">Email</label>
+                <div class="flex items-center bg-gray-100 rounded-lg px-4 py-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-5 h-5 text-gray-500 mr-2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+                    />
+                  </svg>
+                  <span>YogaXXXX@gmail.com</span>
+                </div>
+              </div>
+        
+              <!-- Phone -->
+              <div>
+                <label class="block text-gray-600 mb-1">Phone</label>
+                <div class="flex items-center bg-gray-100 rounded-lg px-4 py-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="size-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"
+                    />
+                  </svg>
+                  <span>0813XXXX</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <div id="notifikasi" class="content-section hidden">
+            <h2 class="text-xl font-semibold mb-2">Pengaturan Notifikasi</h2>
+            <label class="flex items-center gap-2">
+              <input type="checkbox" checked /> Email
+            </label>
+            <label class="flex items-center gap-2 mt-2">
+              <input type="checkbox" /> Push Notification
+            </label>
+          </div>
+          <div id="keamanan" class="content-section hidden">
+            <h2 class="text-xl font-semibold mb-2">Keamanan</h2>
+            <p>Kata sandi terakhir diubah: 10 Maret 2025</p>
+            <a href="test2.html">
+              <button class="mt-2 px-4 py-2 bg-red-500 text-white rounded">
+                Ubah Kata Sandi
+              </button>
+            </a>
+            
+          </div>
+          <div id="tentang" class="content-section hidden mt-8">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+              <h2 class="text-2xl font-semibold text-red-600 mb-4 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M13 16h-1v-4h-1m1-4h.01M12 12h.01M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z" />
+                </svg>
+                Tentang Aplikasi
+              </h2>
+              
+              <p class="text-gray-700 mb-4 leading-relaxed">
+                <strong>Selamat datang di <span class="text-red-600">PRScope</span>!</strong> Kami hadir untuk mempermudah proses monitoring dan analisis data. Aplikasi ini dirancang khusus untuk membantu para <span class="font-medium">data analyst</span> dalam mengelola, memantau, dan menganalisis data secara efisien.
+              </p>
+          
+              <ul class="list-disc list-inside text-gray-700 space-y-2 mb-4">
+                <li>Visualisasi data yang interaktif dan intuitif</li>
+                <li>Analisis data yang mendalam tanpa kompleksitas teknis</li>
+                <li>Pembuatan laporan cepat dan informatif</li>
+                <li>Pengelolaan data yang hemat waktu dan tenaga</li>
+              </ul>
+          
+              <p class="text-gray-700 mb-4">
+                Aplikasi ini diciptakan untuk meningkatkan <span class="font-medium">produktivitas</span> kerja Anda dan memfasilitasi analisis data dalam berbagai bidang. Kami berkomitmen memberikan <span class="font-medium">pengalaman pengguna</span> yang optimal dan mendukung pengambilan keputusan yang lebih cerdas.
+              </p>
+          
+              <div class="bg-gray-100 p-4 rounded-md text-gray-800 text-sm">
+                <p><strong>Versi Aplikasi:</strong> 1.0.0</p>
+                <p><strong>Dikembangkan oleh:</strong> Tim PRScope</p>
+                <p><strong>Email Dukungan:</strong> support@prscope.id</p>
+              </div>
+            </div>
+          </div>
+          
+          
+        </div>
+      </main>
+    </div>
+
+    <script>
+      function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        const mainContent = document.getElementById("main-content");
+        sidebar.classList.toggle("-translate-x-full");
+        mainContent.classList.toggle("ml-64");
+      }
+
+      function toggleDarkMode() {
+        document.body.classList.toggle("dark");
+        const modeStatus = document.getElementById("modeStatus");
+        if (modeStatus) {
+          modeStatus.textContent = document.body.classList.contains("dark")
+            ? "Dark"
+            : "Default";
+        }
+        localStorage.setItem(
+          "theme",
+          document.body.classList.contains("dark") ? "dark" : "light"
+        );
+      }
+
+      function confirmLogout() {
+        return confirm("Apakah Anda yakin ingin logout?");
+      }
+
+      function showContent(section, event) {
+        document.querySelectorAll(".content-section").forEach((div) => {
+          div.classList.add("hidden");
+        });
+        document.getElementById(section).classList.remove("hidden");
+
+        document.querySelectorAll(".tab-btn").forEach((btn) => {
+          btn.classList.remove("bg-red-100");
+          btn.classList.add("bg-white");
+        });
+        event.target.classList.remove("bg-white");
+        event.target.classList.add("bg-red-100");
+      }
+
+      // Load saved theme
+window.onload = function () {
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+      document.body.classList.add("dark");
+  }
+
+  // Buka tab berdasarkan hash (#keamanan) jika ada
+  const hash = window.location.hash;
+  const section = hash ? hash.replace("#", "") : "akun"; // Set default ke 'akun'
+  const button = document.querySelector(`[onclick*="${section}"]`);
+  if (button) {
+      showContent(section, { target: button });
+  } else {
+      // Jika tidak ada hash, buka tab akun sebagai default
+      showContent('akun', { target: document.querySelector('[onclick*="akun"]') });
+  }
+};
+    </script>
+  </body>
+</html>
