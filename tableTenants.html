@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Data Tenant</title>
+    <link rel="website icon" type="png" href="assets/logo_prscope.png" />
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="bg-gray-100">
@@ -39,46 +40,66 @@
       </div>
     </header>
 
-    <!-- Wrapper untuk sidebar + konten -->
-    <div class="flex flex-col pt-16">
+    <div class="flex min-h-screen">
       <!-- Sidebar -->
       <aside
         id="sidebar"
-        class="w-64 bg-[#E8E8E8] text-black flex flex-col fixed top-16 left-0 h-full transition-transform duration-300"
+        class="w-64 bg-[#E8E8E8] text-black flex flex-col fixed top-16 left-0 h-[calc(100vh-4rem)] justify-between overflow-y-auto transition-transform duration-300"
       >
-        <div class="p-5 flex justify-center">
-          <img src="assets/logo.png" alt="Telkom Indonesia" class="h-20" />
+        <div>
+          <!-- Logo -->
+          <div class="p-5 flex justify-center border-b border-gray-300">
+            <img
+              src="assets/logo_prscope.png"
+              alt="Telkom Indonesia"
+              class="h-20"
+            />
+          </div>
+
+          <!-- Navigasi -->
+          <nav>
+            <ul class="mt-4">
+              <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+                <a href="index.html">Dashboard</a>
+              </li>
+              <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+                <a href="list.html">List Gedung</a>
+              </li>
+              <li class="px-5 py-3 bg-red-600 text-white rounded-lg mx-2">
+                <a href="tableTenants.html">List Tenant</a>
+              </li>
+              <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+                <a href="datavisit.html">Data Visit</a>
+              </li>
+              <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
+                <a href="worksheet.html">Work Sheet</a>
+              </li>
+            </ul>
+          </nav>
         </div>
-        <nav class="flex-1">
-          <ul>
-            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
-              <a href="index.html">Dashboard</a>
-            </li>
-            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
-              <a href="list.html">List Gedung</a>
-            </li>
-            <li class="px-5 py-3 bg-red-600 text-white rounded-lg mx-2">
-              <a href="tableTenants.html">List Tenant</a>
-            </li>
-            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
-              <a href="worksheet.html">WORK SHEET</a>
-            </li>
-            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
-              <a href="datavisit.html">Data Visit</a>
-            </li>
-            <li class="px-5 py-3 hover:bg-gray-300 rounded-lg mx-2">
-              <a href="#">Product Stock</a>
-            </li>
-          </ul>
-        </nav>
+
+        <!-- Profile & Logout -->
+        <div class="mb-6 border-t border-gray-300 px-5 pt-4">
+          <a
+            href="setting.html"
+            class="block text-center text-black rounded-md py-2 mb-2 hover:bg-gray-300 transition"
+          >
+            setting
+          </a>
+          <a
+            href="login.html"
+            onclick="return confirmLogout()"
+            class="block text-center text-black rounded-md py-2 mb-2 hover:bg-gray-300 transition"
+          >
+            Logout
+          </a>
+        </div>
       </aside>
 
       <div id="main-content" class="flex-1 flex flex-col ml-64 p-6 mt-16">
         <h2 class="text-xl font-bold mb-4">Data Tenant</h2>
-
-        <!-- Tabel Data Tenant -->
         <table
-          class="w-full bg-white shadow-md rounded-lg overflow-hidden mb-4 border-collapse border border-black"
+          class="w-full bg-white shadow-md rounded-lg overflow-hidden mb-4"
         >
           <thead>
             <tr class="bg-gray-200 text-left border-b border-black">
@@ -142,8 +163,138 @@
         </div>
       </div>
     </div>
+    <!-- Modal Form Edit Tenant -->
+    <div
+      id="edit-modal"
+      class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden"
+    >
+      <div class="bg-white p-6 rounded-lg w-1/3">
+        <h2 class="text-xl font-bold mb-4">Edit Tenant</h2>
+        <form id="edit-form">
+          <div class="mb-4">
+            <label for="edit-namaAM" class="block text-sm font-medium"
+              >Nama AM</label
+            >
+            <input
+              type="text"
+              id="edit-namaAM"
+              class="w-full p-2 border border-gray-300 rounded"
+              required
+            />
+          </div>
+          <div class="mb-4">
+            <label for="edit-namaCC" class="block text-sm font-medium"
+              >Nama CC</label
+            >
+            <input
+              type="text"
+              id="edit-namaCC"
+              class="w-full p-2 border border-gray-300 rounded"
+              required
+            />
+          </div>
+          <!-- Add more fields similarly for other data -->
+          <div class="mb-4">
+            <button
+              type="submit"
+              class="bg-blue-500 text-white px-4 py-2 rounded"
+            >
+              Simpan Perubahan
+            </button>
+            <button
+              type="button"
+              class="bg-gray-500 text-white px-4 py-2 rounded ml-2"
+              onclick="closeEditModal()"
+            >
+              Batal
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
 
     <script>
+      function editTenant(index) {
+        let tenants = JSON.parse(localStorage.getItem("tenants")) || [];
+        let tenant = tenants[index];
+
+        // Mengisi form dengan data tenant yang dipilih
+        document.getElementById("edit-namaAM").value = tenant.namaAM;
+        document.getElementById("edit-namaCC").value = tenant.namaCC;
+        document.getElementById("edit-subsegmen").value = tenant.subsegmen;
+        document.getElementById("edit-namaGedung").value = tenant.namaGedung;
+        document.getElementById("edit-jumlahTenant").value =
+          tenant.jumlahTenant;
+        document.getElementById("edit-jumlahLantai").value =
+          tenant.jumlahLantai;
+        document.getElementById("edit-pks").value = tenant.pks;
+        document.getElementById("edit-jenisPKS").value = tenant.jenisPKS;
+        document.getElementById("edit-eos").value = tenant.eos;
+        document.getElementById("edit-foMSAN").value = tenant.foMSAN;
+        document.getElementById("edit-namaInfluencer").value =
+          tenant.namaInfluencer;
+        document.getElementById("edit-jabatanInfluencer").value =
+          tenant.jabatanInfluencer;
+        document.getElementById("edit-decisionMaker").value =
+          tenant.decisionMaker;
+        document.getElementById("edit-statusVisit").value = tenant.statusVisit;
+        document.getElementById("edit-jumlahTenantVisit").value =
+          tenant.jumlahTenantVisit;
+        document.getElementById("edit-progress").value = tenant.progress;
+        document.getElementById("edit-note").value = tenant.note;
+
+        // Menyimpan index tenant yang akan diubah
+        document.getElementById("edit-form").onsubmit = function (event) {
+          event.preventDefault();
+          saveEdit(index);
+        };
+
+        // Menampilkan modal
+        document.getElementById("edit-modal").classList.remove("hidden");
+      }
+
+      function saveEdit(index) {
+        let tenants = JSON.parse(localStorage.getItem("tenants")) || [];
+
+        // Mengambil data dari form
+        let updatedTenant = {
+          namaAM: document.getElementById("edit-namaAM").value,
+          namaCC: document.getElementById("edit-namaCC").value,
+          subsegmen: document.getElementById("edit-subsegmen").value,
+          namaGedung: document.getElementById("edit-namaGedung").value,
+          jumlahTenant: document.getElementById("edit-jumlahTenant").value,
+          jumlahLantai: document.getElementById("edit-jumlahLantai").value,
+          pks: document.getElementById("edit-pks").value,
+          jenisPKS: document.getElementById("edit-jenisPKS").value,
+          eos: document.getElementById("edit-eos").value,
+          foMSAN: document.getElementById("edit-foMSAN").value,
+          namaInfluencer: document.getElementById("edit-namaInfluencer").value,
+          jabatanInfluencer: document.getElementById("edit-jabatanInfluencer")
+            .value,
+          decisionMaker: document.getElementById("edit-decisionMaker").value,
+          statusVisit: document.getElementById("edit-statusVisit").value,
+          jumlahTenantVisit: document.getElementById("edit-jumlahTenantVisit")
+            .value,
+          progress: document.getElementById("edit-progress").value,
+          note: document.getElementById("edit-note").value,
+        };
+
+        // Menyimpan data yang telah diperbarui
+        tenants[index] = updatedTenant;
+        localStorage.setItem("tenants", JSON.stringify(tenants));
+
+        // Menutup modal dan memperbarui tabel
+        closeEditModal();
+        renderTable();
+      }
+
+      function closeEditModal() {
+        document.getElementById("edit-modal").classList.add("hidden");
+      }
+
+      function confirmLogout() {
+        return confirm("Apakah Anda yakin ingin logout?");
+      }
       function toggleSidebar() {
         const sidebar = document.getElementById("sidebar");
         const mainContent = document.getElementById("main-content");
